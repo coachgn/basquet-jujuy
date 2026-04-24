@@ -13,11 +13,11 @@
     --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
     --accent:#e8c84a;--accent2:#4ab8e8;
     --text:#f0eee8;--text2:#9a9890;--text3:#5a5856;
-    --green:#4ae87a;--orange:#e87a4a;--red:#e84a4a;
+    --green:#4ae87a;--orange:#e87a4a;--red:#e84a4a;--purple:#b07ae8;
     --mono:'DM Mono',monospace;--head:'Barlow Condensed',sans-serif;--body:'Barlow',sans-serif;
   }
   body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14px;line-height:1.5;min-height:100vh}
-  .site-header{background:var(--surface);border-bottom:1px solid var(--border2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .site-header{background:var(--surface);border-bottom:1px solid var(--border2);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
   .site-logo{font-family:var(--head);font-size:22px;font-weight:800;letter-spacing:.02em;color:var(--accent);text-transform:uppercase}
   .site-logo span{color:var(--text2);font-weight:400}
   .site-meta{font-family:var(--mono);font-size:11px;color:var(--text3)}
@@ -32,38 +32,29 @@
   .player-btn:hover{color:var(--text2)}
   .player-btn.active{color:var(--accent2);border-bottom-color:var(--accent2)}
   .main{padding:20px 24px;max-width:1200px;margin:0 auto}
-  /* player header */
   .player-header{display:flex;align-items:flex-start;gap:18px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border)}
   .player-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:17px;font-weight:800;flex-shrink:0;border:2px solid var(--border2)}
   .player-info h1{font-family:var(--head);font-size:28px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;line-height:1}
-  .player-info h1 span{color:var(--accent)}
-  .player-meta{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:5px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-  /* kpi */
   .kpi-strip{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-bottom:14px}
   .kpi{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:11px 8px;text-align:center}
   .kpi-val{font-family:var(--head);font-size:20px;font-weight:700;color:var(--text);line-height:1}
   .kpi-lbl{font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.05em}
-  /* scorecard */
   .scorecard-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
   .sc-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 13px;position:relative;overflow:hidden}
   .sc-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:8px 8px 0 0}
-  .sc-box.c-green::before{background:var(--green)}
-  .sc-box.c-blue::before{background:var(--accent2)}
-  .sc-box.c-amber::before{background:var(--accent)}
-  .sc-box.c-orange::before{background:var(--orange)}
-  .sc-box.c-red::before{background:var(--red)}
+  .sc-box.c-green::before{background:var(--green)}.sc-box.c-blue::before{background:var(--accent2)}
+  .sc-box.c-amber::before{background:var(--accent)}.sc-box.c-orange::before{background:var(--orange)}
+  .sc-box.c-red::before{background:var(--red)}.sc-box.c-purple::before{background:var(--purple)}
   .sc-level{font-family:var(--head);font-size:20px;font-weight:800;line-height:1;margin-bottom:1px}
-  .sc-level.green{color:var(--green)}.sc-level.blue{color:var(--accent2)}.sc-level.amber{color:var(--accent)}.sc-level.orange{color:var(--orange)}.sc-level.red{color:var(--red)}
+  .sc-level.green{color:var(--green)}.sc-level.blue{color:var(--accent2)}.sc-level.amber{color:var(--accent)}
+  .sc-level.orange{color:var(--orange)}.sc-level.red{color:var(--red)}.sc-level.purple{color:var(--purple)}
   .sc-label{font-family:var(--head);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text2);margin-bottom:4px}
   .sc-metric{font-family:var(--mono);font-size:11px;color:var(--text3);margin-bottom:5px}
   .sc-detail{font-family:var(--mono);font-size:10px;color:var(--text3);line-height:1.45;border-top:1px solid var(--border);padding-top:5px;margin-top:2px}
-  /* grids */
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-  /* section card */
   .scard{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:15px}
   .scard-title{font-family:var(--head);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:11px;display:flex;align-items:center;gap:6px}
   .scard-title::before{content:'';display:inline-block;width:3px;height:10px;background:var(--accent);border-radius:2px}
-  /* pos bars */
   .pos-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
   .pos-lbl{font-family:var(--mono);font-size:11px;color:var(--text2);width:70px;flex-shrink:0}
   .pos-track{flex:1;height:5px;background:rgba(255,255,255,0.06);border-radius:3px}
@@ -72,7 +63,6 @@
   .badge-e{background:rgba(232,200,74,0.15);color:var(--accent);font-size:9px;padding:1px 5px;border-radius:3px;font-family:var(--mono);border:1px solid rgba(232,200,74,0.3)}
   .badge-p{background:rgba(154,152,144,0.1);color:var(--text3);font-size:9px;padding:1px 5px;border-radius:3px;font-family:var(--mono);border:1px solid rgba(154,152,144,0.15)}
   .badge-l{background:rgba(232,74,74,0.1);color:var(--red);font-size:9px;padding:1px 5px;border-radius:3px;font-family:var(--mono);border:1px solid rgba(232,74,74,0.2)}
-  /* lv */
   .lv-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .lv-card{background:var(--surface2);border-radius:6px;padding:11px;border-left:3px solid var(--border2)}
   .lv-card.local{border-left-color:var(--accent2)}.lv-card.visit{border-left-color:var(--orange)}
@@ -80,7 +70,6 @@
   .lv-stat{display:flex;justify-content:space-between;margin-bottom:3px}
   .lv-lbl{color:var(--text3);font-family:var(--mono);font-size:10px}
   .lv-val{color:var(--text);font-family:var(--mono);font-size:10px;font-weight:500}
-  /* zona */
   .zona-row{display:grid;grid-template-columns:68px 1fr 60px 52px 58px;gap:5px;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
   .zona-row:last-child{border-bottom:none}
   .zona-lbl{font-family:var(--mono);font-size:11px;color:var(--text2)}
@@ -88,9 +77,7 @@
   .zona-bwrap{display:flex;align-items:center;gap:5px}
   .zona-btrack{flex:1;height:4px;background:rgba(255,255,255,0.06);border-radius:3px}
   .zona-val{font-family:var(--mono);font-size:11px;color:var(--text2);text-align:right}
-  /* blocks */
   .block-wrap{position:relative;width:100%;height:200px}
-  /* verdict */
   .verdict-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:0}
   .vcard{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:15px}
   .vcard.fav{border-top:2px solid var(--green)}.vcard.con{border-top:2px solid var(--accent)}
@@ -98,13 +85,12 @@
   .vtitle.g{color:var(--green)}.vtitle.a{color:var(--accent)}
   .vitem{display:flex;gap:6px;margin-bottom:6px;font-size:11px;color:var(--text2);line-height:1.5}
   .vitem::before{content:'→';color:var(--text3);flex-shrink:0;font-family:var(--mono)}
-  /* renov badge */
   .renov-badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:4px;font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
   .r-si{background:rgba(74,232,122,0.12);color:var(--green);border:1px solid rgba(74,232,122,0.25)}
   .r-cond{background:rgba(74,184,232,0.12);color:var(--accent2);border:1px solid rgba(74,184,232,0.25)}
   .r-eval{background:rgba(232,122,74,0.12);color:var(--orange);border:1px solid rgba(232,122,74,0.25)}
   .r-no{background:rgba(232,74,74,0.1);color:var(--red);border:1px solid rgba(232,74,74,0.2)}
-  /* summary */
+  /* SUMMARY */
   .sum-title{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;display:flex;align-items:center;gap:7px}
   .sum-title::before{content:'';display:inline-block;width:3px;height:11px;background:var(--accent);border-radius:2px}
   .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px}
@@ -126,17 +112,51 @@
   .pf-hl-val{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--text2)}
   .pf-desc{font-size:10px;color:var(--text3);line-height:1.5;font-family:var(--mono)}
   .vl-row{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--surface);border:1px solid var(--border);border-radius:6px;margin-bottom:7px}
-  .vl-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+  .vl-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
   .vl-name{font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text);margin-bottom:3px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
   .vl-reason{font-size:10px;color:var(--text3);line-height:1.5;font-family:var(--mono)}
   .exec-box{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:16px;border-left:3px solid var(--accent);margin-top:12px}
   .exec-title{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
   .exec-text{font-size:11px;color:var(--text2);line-height:1.7;font-family:var(--mono)}
   .exec-text strong{color:var(--text)}
+  /* TEAM PAGE */
+  .team-kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+  .team-kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 12px}
+  .team-kpi-val{font-family:var(--head);font-size:28px;font-weight:800;line-height:1;margin-bottom:2px}
+  .team-kpi-lbl{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text2)}
+  .team-kpi-sub{font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:4px;line-height:1.4}
+  .rank-badge{font-family:var(--head);font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-left:6px;display:inline-block}
+  .rank-1{background:rgba(232,200,74,0.18);color:var(--accent);border:1px solid rgba(232,200,74,0.35)}
+  .rank-top{background:rgba(74,232,122,0.12);color:var(--green);border:1px solid rgba(74,232,122,0.25)}
+  .rank-mid{background:rgba(154,152,144,0.1);color:var(--text3);border:1px solid rgba(154,152,144,0.15)}
+  .rank-bot{background:rgba(232,74,74,0.1);color:var(--red);border:1px solid rgba(232,74,74,0.2)}
+  .factor-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+  .factor-row:last-child{border-bottom:none}
+  .factor-icon{font-size:22px;flex-shrink:0;width:32px;text-align:center;margin-top:2px}
+  .factor-title{font-family:var(--head);font-size:14px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--text);margin-bottom:3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .factor-body{font-family:var(--mono);font-size:11px;color:var(--text3);line-height:1.6}
+  .cycle-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+  .cycle-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;border-top:2px solid var(--border2)}
+  .cycle-card.asc{border-top-color:var(--green)}
+  .cycle-card.mes{border-top-color:var(--accent)}
+  .cycle-card.sta{border-top-color:var(--accent2)}
+  .cycle-card.dec{border-top-color:var(--red)}
+  .cycle-head{font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text);margin-bottom:3px;display:flex;align-items:center;gap:8px}
+  .cycle-rec{font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:6px}
+  .cycle-body{font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.55}
+  .standing-row{display:grid;grid-template-columns:28px 1fr 60px 60px 60px;gap:8px;align-items:center;padding:7px 10px;border-radius:5px;margin-bottom:3px;font-family:var(--mono);font-size:11px}
+  .standing-row.highlight{background:rgba(232,200,74,0.08);border:1px solid rgba(232,200,74,0.2)}
+  .standing-row.header{color:var(--text3);font-size:9px;text-transform:uppercase;letter-spacing:.06em;padding-bottom:5px}
+  .optim-row{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+  .optim-row:last-child{border-bottom:none}
+  .optim-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
+  .optim-title{font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--text);margin-bottom:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .optim-body{font-family:var(--mono);font-size:11px;color:var(--text3);line-height:1.55}
+  .player-meta{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:5px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
   canvas{display:block}
   @media(max-width:700px){
-    .kpi-strip{grid-template-columns:repeat(4,1fr)}
-    .grid2,.scorecard-row,.verdict-row,.profile-grid{grid-template-columns:1fr}
+    .kpi-strip,.team-kpi-strip{grid-template-columns:repeat(4,1fr)}
+    .grid2,.scorecard-row,.verdict-row,.profile-grid,.cycle-grid{grid-template-columns:1fr}
     .zona-row{grid-template-columns:62px 1fr 54px 46px 52px}
   }
 </style>
@@ -144,201 +164,184 @@
 <body>
 <header class="site-header">
   <div class="site-logo">Jujuy Básquet <span>· Plantel 2025-26</span></div>
-  <div class="site-meta">FASE REGULAR · 32 PARTIDOS</div>
+  <div class="site-meta">FASE REGULAR · 32 PARTIDOS · 8° PUESTO</div>
 </header>
 <nav class="top-nav" id="topNav">
-  <button class="page-btn active" data-page="players">Jugadores</button>
+  <button class="page-btn active" data-page="team">Resumen Equipo</button>
   <button class="page-btn" data-page="summary">Resumen del Plantel</button>
+  <button class="page-btn" data-page="players">Jugadores</button>
 </nav>
-<nav class="player-nav" id="playerNav"></nav>
+<nav class="player-nav" id="playerNav" style="display:none;"></nav>
 <main class="main" id="mainContent"></main>
 
 <script>
+// ============================================================
+// PLAYER DATA
+// ============================================================
 const P = [
   {id:'stehli',name:'Stehli',full:'Stehli, Ramiro G.',init:'RS',ab:'#1a2a3a',ac:'#4ab8e8',
-   pj:32,min:31.03,plays:16.49,pts:13.53,ppp:0.82,usg:23.99,efg:44.60,ts:47.52,rtl:19.60,val:12.13,
+   pj:32,min:31.03,plays:16.49,pts:13.53,ppp:0.82,usg:23.99,efg:44.60,val:12.13,
    t2c:2.88,t2i:6.75,t2p:42.59,t3c:1.78,t3i:5.69,t3p:31.32,t1c:2.44,t1i:4.09,t1p:59.54,
    ast:2.50,rd:3.63,ro:1.50,reb:5.13,
    lPts:14.20,lEfg:46.1,lReb:5.4,lVal:13.8,vPts:12.85,vEfg:43.1,vReb:4.8,vVal:10.4,
-   lDesc:'Agresivo: mayor volumen de faltas recibidas y tiros libres.',
-   vDesc:'Perimetral: depende más del triple; baja su eficiencia.',
+   lDesc:'Agresivo: mayor volumen de faltas recibidas y tiros libres.',vDesc:'Perimetral: depende más del triple; baja su eficiencia.',
    bl:[[12.5,45.1,13.2],[11.2,41.8,10.5],[14.2,48.5,16.1],[13.8,44.5,14.1],[10.9,40.2,9.8],[15.8,47.9,16.5],[13.5,43.1,13.2],[14.6,46.2,15.4]],
    pe:{pts:'ÉLITE',plays:'ÉLITE',efg:'PROM',ppp:'PROM'},pp:[92,95,50,47],
-   sc:[
-     {lv:'Alto',lc:'green',bc:'c-green',lb:'Impacto colectivo',mt:'16.5 PLAYS · 31 MIN',dt:'Máximo volumen del plantel en decisiones y minutos. Absorbe la presión cuando el sistema colectivo se traba.'},
-     {lv:'Medio',lc:'orange',bc:'c-orange',lb:'Eficiencia individual',mt:'eFG% 44.6% · PPP 0.82',dt:'Promedio sostenible pero mejorable. El volumen compensa la eficiencia no élite.'},
-     {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'Activo indispensable. Condición: limitar a 29-30 MIN y trabajar el tiro libre.'}
-   ],
+   sc:[{lv:'Alto',lc:'green',bc:'c-green',lb:'Impacto colectivo',mt:'16.5 PLAYS · 31 MIN',dt:'Máximo volumen del plantel en decisiones y minutos. Absorbe la presión cuando el sistema colectivo se traba.'},
+       {lv:'Medio',lc:'orange',bc:'c-orange',lb:'Eficiencia individual',mt:'eFG% 44.6% · PPP 0.82',dt:'Promedio sostenible pero mejorable. El volumen compensa la eficiencia no élite.'},
+       {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'Activo indispensable. Condición: limitar a 29-30 MIN y trabajar el tiro libre.'}],
    fav:['Nº1 del equipo en minutos y decisiones. Protagonismo insustituible.','Generador de puntos difíciles: libres, rebotes ofensivos y contacto.','B6 y B8 son sus mejores bloques, incluso en segunda vuelta.','Cierra fuerte la fase regular (B8: 14.6 PTS, VAL 15.4).'],
    con:['Limitar a 29-30 MIN: superar 32 min baja su eFG% bajo el 43%.','Tiro libre (59.5%) es su mayor zona de pérdida de valor.','Plan defensivo ante equipos de ritmo alto (San Isidro, Barrio Parque).'],
-   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',
-   rr:'Protagonista indispensable. Mayor volumen en minutos y decisiones. Condición: limitar a 29-30 MIN y trabajar el tiro libre (59.5%).',
-   phl:[{l:'PLAYS',v:'16.5'},{l:'USG%',v:'24.0%'}],
-   pd:'Protagonista absoluto en volumen. Generador de puntos difíciles. Impacto élite en decisiones.',pb:'ÉLITE PTS'},
+   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',rr:'Protagonista indispensable. Mayor volumen en minutos y decisiones. Condición: limitar a 29-30 MIN y trabajar el tiro libre (59.5%).',
+   phl:[{l:'PLAYS',v:'16.5'},{l:'USG%',v:'24.0%'}],pd:'Protagonista absoluto en volumen. Generador de puntos difíciles. Impacto élite en decisiones.',pb:'ÉLITE PTS'},
 
   {id:'ibarra',name:'Ibarra',full:'Ibarra, Santiago R.',init:'SI',ab:'#1a3a2a',ac:'#4ae87a',
-   pj:31,min:26.28,plays:11.68,pts:13.23,ppp:1.13,usg:20.07,efg:58.39,ts:59.92,rtl:15.48,val:10.94,
+   pj:31,min:26.28,plays:11.68,pts:13.23,ppp:1.13,usg:20.07,efg:58.39,val:10.94,
    t2c:1.87,t2i:2.94,t2p:63.74,t3c:2.65,t3i:7.06,t3p:37.44,t1c:1.55,t1i:2.35,t1p:65.75,
    ast:0.90,rd:2.71,ro:1.03,reb:3.74,
    lPts:14.5,lEfg:61.2,lReb:4.0,lVal:12.1,vPts:12.0,vEfg:55.4,vReb:3.5,vVal:9.8,
    lDesc:'Tirador élite de local: mayor conversión en T3 (39%+).',vDesc:'Baja levemente el triple; sostiene eficiencia interna.',
    bl:[[12.8,54.2,10.5],[14.5,62.1,11.8],[11.2,55.8,9.2],[13.5,60.0,11.2],[11.0,52.0,8.8],[16.2,65.0,13.5],[14.8,58.5,12.8],[14.0,62.5,12.2]],
    pe:{pts:'ÉLITE',plays:'PROM',efg:'ÉLITE',ppp:'ÉLITE'},pp:[91,58,85,95],
-   sc:[
-     {lv:'Élite',lc:'amber',bc:'c-amber',lb:'Eficiencia individual',mt:'eFG% 58.4% · PPP 1.13',dt:'Mejor PPP del equipo. El jugador más rentable por posesión. Todas sus métricas de eficiencia son élite.'},
-     {lv:'Alto',lc:'green',bc:'c-green',lb:'Impacto anotador',mt:'13.2 PTS · T2% 63.7%',dt:'Segundo anotador del equipo con la mayor eficiencia interna. Tirador de dos élite.'},
-     {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'Titular indiscutible. Bajo RTL% lo hace sostenible. Considerar ampliar su volumen de PLAYS.'}
-   ],
-   fav:['Mejor PPP del equipo (1.13): el jugador más rentable por posesión.','eFG% de 58.4%, el más alto entre los jugadores de rotación principal.','Bajo RTL% (15.5%) lo hace sostenible: no depende de la línea para generar valor.','Consistencia: todos los bloques por encima de 52% eFG%.'],
-   con:['Aumentar volumen de PLAYS (11.7): puede absorber más decisiones.','Mejorar conversión desde 3 visitante: diferencia de 6pp entre local y visitante.','Integrar como solución de espaciado en situaciones de playoffs.'],
-   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',
-   rr:'Mejor PPP del equipo (1.13) y eFG% de 58.4%. Tirador de dos más eficiente. Bajo RTL% (15.5%) lo hace sostenible. Titular sólido sin costos defensivos altos.',
-   phl:[{l:'eFG%',v:'58.4%'},{l:'PPP',v:'1.13'}],
-   pd:'Mejor PPP del equipo (1.13). Tirador de dos de élite (63.7% T2%). Motor ofensivo en 1vs1. Poca dependencia del tiro libre (15.5% RTL).',pb:'ÉLITE PTS'},
+   sc:[{lv:'Élite',lc:'amber',bc:'c-amber',lb:'Eficiencia individual',mt:'eFG% 58.4% · PPP 1.13',dt:'Mejor PPP del equipo. El jugador más rentable por posesión.'},
+       {lv:'Alto',lc:'green',bc:'c-green',lb:'Impacto anotador',mt:'13.2 PTS · T2% 63.7%',dt:'Segundo anotador del equipo con la mayor eficiencia interna.'},
+       {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'Titular indiscutible. Bajo RTL% lo hace sostenible.'}],
+   fav:['Mejor PPP del equipo (1.13): el jugador más rentable por posesión.','eFG% de 58.4%, el más alto entre los jugadores de rotación principal.','Consistencia: todos los bloques por encima de 52% eFG%.'],
+   con:['Aumentar volumen de PLAYS (11.7): puede absorber más decisiones.','Mejorar conversión desde 3 visitante: diferencia de 6pp.','Integrar como solución de espaciado en playoffs.'],
+   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',rr:'Mejor PPP del equipo (1.13) y eFG% de 58.4%. Tirador de dos más eficiente. Bajo RTL% (15.5%) lo hace sostenible.',
+   phl:[{l:'eFG%',v:'58.4%'},{l:'PPP',v:'1.13'}],pd:'Mejor PPP del equipo (1.13). Tirador de dos de élite (63.7% T2%). Motor ofensivo en 1vs1.',pb:'ÉLITE PTS'},
 
   {id:'grytsak',name:'Grytsak',full:'Grytsak, Andriy',init:'AG',ab:'#2a1a10',ac:'#e87a4a',
-   pj:31,min:26.54,plays:11.28,pts:10.00,ppp:0.89,usg:19.19,efg:49.81,ts:50.55,rtl:16.48,val:15.42,
+   pj:31,min:26.54,plays:11.28,pts:10.00,ppp:0.89,usg:19.19,efg:49.81,val:15.42,
    t2c:3.81,t2i:6.74,t2p:56.46,t3c:0.32,t3i:1.87,t3p:17.24,t1c:1.42,t1i:2.90,t1p:48.89,
    ast:1.65,rd:4.68,ro:3.81,reb:8.48,
    lPts:10.8,lEfg:52.0,lReb:9.2,lVal:16.8,vPts:9.2,vEfg:47.5,vReb:7.8,vVal:14.0,
    lDesc:'Rebote dominante: 9.2 total en casa. VAL 16.8.',vDesc:'Baja el rebote ofensivo visitante; mantiene presencia defensiva.',
    bl:[[10.5,47.5,15.8],[9.2,45.0,13.5],[11.5,52.0,17.2],[10.2,50.5,15.0],[9.8,48.0,14.2],[11.2,54.0,16.8],[10.5,50.0,15.5],[9.5,51.5,14.8]],
    pe:{pts:'PROM',plays:'PROM',efg:'PROM',ppp:'PROM'},pp:[55,55,58,52],
-   sc:[
-     {lv:'Máximo',lc:'amber',bc:'c-amber',lb:'Impacto en rebote',mt:'RD 4.68 · RO 3.81 · RT 8.48',dt:'Mejor reboteador del plantel. El rebote ofensivo (3.81) es su principal arma de segunda oportunidad. Insustituible.'},
-     {lv:'Alto',lc:'green',bc:'c-green',lb:'Impacto colectivo (VAL)',mt:'VAL 15.42 — Nº1 del plantel',dt:'A pesar de no liderar en PTS, su VAL es el más alto del equipo gracias al rebote y la defensa.'},
-     {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'Motor defensivo insustituible. El ancla interior del sistema. No tiene reemplazo en el plantel.'}
-   ],
-   fav:['VAL más alto del plantel (15.4): motor defensivo y de rebote.','8.48 rebotes por partido: ancla del tablero en ambos extremos.','Rebote ofensivo élite (3.81): segunda oportunidad como sistema.','Consistencia extraordinaria: todos los bloques con VAL > 13.'],
-   con:['Mejorar tiro libre (48.9%): en situaciones de presión final es vulnerable.','Desarrollar amenaza perimetral mínima para abrir espacios.','Gestionar carga física: el jugador con mayor desgaste en rebote del equipo.'],
-   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',
-   rr:'VAL más alto del equipo (15.4) gracias al rebote total (8.48). Motor defensivo insustituible. Es el ancla interior del sistema. No tiene reemplazo en el plantel.',
-   phl:[{l:'eFG%',v:'49.8%'},{l:'REB',v:'8.48'}],
-   pd:'VAL más alto del plantel (15.4). Su valor radica en el rebote total (8.48 por partido). El motor defensivo del equipo. Eficiencia interna sólida (56.5% T2%).',pb:'ÉLITE VAL'},
+   sc:[{lv:'Máximo',lc:'amber',bc:'c-amber',lb:'Impacto en rebote',mt:'RD 4.68 · RO 3.81 · RT 8.48',dt:'Mejor reboteador del plantel. El rebote ofensivo (3.81) es clave para el sistema de segunda oportunidad.'},
+       {lv:'Alto',lc:'green',bc:'c-green',lb:'VAL colectivo',mt:'VAL 15.42 — Nº1 del plantel',dt:'A pesar de no liderar en PTS, su VAL es el más alto del equipo gracias al rebote y la defensa.'},
+       {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'Motor defensivo insustituible. El ancla interior del sistema.'}],
+   fav:['VAL más alto del plantel (15.4): motor defensivo y de rebote.','8.48 rebotes por partido: ancla del tablero en ambos extremos.','Rebote ofensivo élite (3.81): segunda oportunidad como sistema.'],
+   con:['Mejorar tiro libre (48.9%): vulnerable en situaciones de presión final.','Desarrollar amenaza perimetral mínima para abrir espacios.','Gestionar carga física.'],
+   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',rr:'VAL más alto del equipo (15.4) gracias al rebote total (8.48). Motor defensivo insustituible. El ancla interior del sistema.',
+   phl:[{l:'eFG%',v:'49.8%'},{l:'REB',v:'8.48'}],pd:'VAL más alto del plantel (15.4). Su valor radica en el rebote total (8.48 por partido). Motor defensivo del equipo.',pb:'ÉLITE VAL'},
 
   {id:'tarnowyk',name:'Tarnowyk',full:'Tarnowyk, Francisco N.',init:'FT',ab:'#2a1a2a',ac:'#c87aaa',
-   pj:29,min:25.21,plays:11.85,pts:9.86,ppp:0.83,usg:21.22,efg:45.59,ts:48.06,rtl:13.97,val:6.72,
+   pj:29,min:25.21,plays:11.85,pts:9.86,ppp:0.83,usg:21.22,efg:45.59,val:6.72,
    t2c:2.00,t2i:4.10,t2p:48.74,t3c:1.52,t3i:5.28,t3p:28.76,t1c:1.31,t1i:2.00,t1p:65.52,
    ast:2.00,rd:2.90,ro:0.83,reb:3.72,
    lPts:10.5,lEfg:47.5,lReb:3.9,lVal:7.5,vPts:9.2,vEfg:43.5,vReb:3.5,vVal:5.9,
    lDesc:'Mejor conversión interior de local; triple más regular.',vDesc:'Triple cae al 25%: su arma principal se apaga de visitante.',
    bl:[[10.5,48.0,8.2],[9.8,44.5,6.5],[11.2,50.0,8.8],[10.5,47.0,7.5],[8.8,42.0,5.8],[10.5,46.5,7.2],[9.2,44.0,6.5],[8.5,41.5,5.5]],
    pe:{pts:'PROM',plays:'PROM',efg:'PROM',ppp:'PROM'},pp:[52,58,42,45],
-   sc:[
-     {lv:'Bajo',lc:'red',bc:'c-red',lb:'Eficiencia de triple',mt:'T3% 28.76% · eFG% 45.6%',dt:'Su principal arma rinde por debajo del umbral mínimo. Un triplista necesita al menos 34% para ser efectivo.'},
-     {lv:'Bajo',lc:'red',bc:'c-red',lb:'Impacto colectivo (VAL)',mt:'VAL 6.72 — el más bajo entre titulares',dt:'Para los minutos que recibe (25.2 MIN), su aporte global es el menor de la rotación principal.'},
-     {lv:'Media',lc:'orange',bc:'c-orange',lb:'Recomendación',mt:'EVALUAR',dt:'Si no mejora el triple en pretemporada, su utilidad en playoffs cae. Necesita otro recurso de ataque.'}
-   ],
-   fav:['Triplista de mayor volumen del equipo (44.5% del tiro desde 3).','Buen tiro libre en situaciones clave (65.5%).','Corre bien la cancha: útil en transición ofensiva.','Puede jugar en 2 y 3: versatilidad posicional.'],
-   con:['Mejorar conversión desde 3 (28.8%): su principal amenaza actualmente sub-rinde.','VAL de 6.72 es el más bajo entre titulares: necesita otro aporte diferenciador.','Desarrollar juego de dos puntos: no puede depender solo del triple.','Si no mejora el triple, su utilidad en playoffs cae significativamente.'],
-   ren:'eval',rl:'EVALUAR',rc:'#e87a4a',
-   rr:'Mayor porcentaje de triples del plantel (44.5% del tiro) pero solo 28.8% de conversión. VAL 6.72 es el más bajo entre titulares. Si no mejora el triple en pretemporada, su utilidad en playoffs disminuye.',
-   phl:[{l:'eFG%',v:'45.6%'},{l:'T3%',v:'28.8%'}],
-   pd:'Perfil perimetral: 44.5% del tiro son triples (mayor % del plantel). Baja conversión desde 3 (28.8%) arrastra su eficiencia. VAL bajo (6.72) para el volumen de minutos.',pb:'PROM'},
+   sc:[{lv:'Bajo',lc:'red',bc:'c-red',lb:'Eficiencia de triple',mt:'T3% 28.76% · eFG% 45.6%',dt:'Su principal arma rinde por debajo del umbral mínimo. Un triplista necesita al menos 34% para ser efectivo.'},
+       {lv:'Bajo',lc:'red',bc:'c-red',lb:'VAL colectivo',mt:'VAL 6.72 — el más bajo entre titulares',dt:'Para los minutos que recibe (25.2 MIN), su aporte global es el menor de la rotación principal.'},
+       {lv:'Media',lc:'orange',bc:'c-orange',lb:'Recomendación',mt:'EVALUAR',dt:'Si no mejora el triple en pretemporada, su utilidad en playoffs cae.'}],
+   fav:['Triplista de mayor volumen del equipo (44.5% del tiro desde 3).','Buen tiro libre en situaciones clave (65.5%).','Versatilidad posicional: puede jugar en 2 y 3.'],
+   con:['Mejorar conversión desde 3 (28.8%): su principal amenaza sub-rinde.','VAL de 6.72 el más bajo entre titulares: necesita otro aporte diferenciador.','Desarrollar juego de dos puntos.'],
+   ren:'eval',rl:'EVALUAR',rc:'#e87a4a',rr:'Mayor porcentaje de triples del plantel (44.5%) pero solo 28.8% de conversión. VAL 6.72 el más bajo entre titulares.',
+   phl:[{l:'eFG%',v:'45.6%'},{l:'T3%',v:'28.8%'}],pd:'Perfil perimetral: 44.5% del tiro son triples (mayor % del plantel). Baja conversión arrastra su eficiencia.',pb:'PROM'},
 
   {id:'marini',name:'Marini',full:'Marini, Juan Cruz',init:'JM',ab:'#2a2010',ac:'#e8c84a',
-   pj:31,min:24.87,plays:10.52,pts:8.84,ppp:0.84,usg:19.11,efg:47.83,ts:50.14,rtl:12.65,val:9.32,
+   pj:31,min:24.87,plays:10.52,pts:8.84,ppp:0.84,usg:19.11,efg:47.83,val:9.32,
    t2c:2.16,t2i:4.19,t2p:51.54,t3c:1.16,t3i:3.97,t3p:29.27,t1c:1.03,t1i:1.48,t1p:69.57,
    ast:3.65,rd:2.77,ro:0.87,reb:3.65,
    lPts:9.2,lEfg:49.5,lReb:3.8,lVal:10.2,vPts:8.5,vEfg:46.0,vReb:3.5,vVal:8.4,
-   lDesc:'Mejor organizador de local; más AST y VAL.',vDesc:'Mantiene la creación de juego; menor eficiencia en definición.',
+   lDesc:'Mejor organizador de local; más AST y VAL.',vDesc:'Mantiene la creación; menor eficiencia en definición.',
    bl:[[9.2,48.5,10.5],[8.5,46.0,8.8],[9.5,50.0,10.2],[8.8,48.0,9.5],[7.5,44.5,7.8],[10.2,52.0,11.0],[9.0,47.5,9.8],[8.5,49.0,9.5]],
    pe:{pts:'PROM',plays:'PROM',efg:'PROM',ppp:'PROM'},pp:[48,50,52,49],
-   sc:[
-     {lv:'Máximo',lc:'amber',bc:'c-amber',lb:'Generación de juego',mt:'AST 3.65 — Nº1 del plantel',dt:'El mejor pasador del equipo. Su valor real está en las posesiones que crea para sus compañeros, no en su box score.'},
-     {lv:'Sólida',lc:'blue',bc:'c-blue',lb:'Eficiencia individual',mt:'eFG% 47.8% · PPP 0.84',dt:'Eficiencia consistente toda la temporada. No fuerza el tiro: toma decisiones inteligentes en cada posesión.'},
-     {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'El sistema sufriría sin un base-creador de este perfil. Su impacto colectivo supera sus números individuales.'}
-   ],
-   fav:['Mayor generador de asistencias del plantel (3.65 AST): crea juego para otros.','Eficiencia sólida y consistente a lo largo de toda la temporada.','Doble de dos con buena conversión (51.5% T2%): no fuerza el triple.','Bajo RTL% (12.7%): sostenible en carga.'],
-   con:['Mejorar tiro libre (69.6%): por debajo del promedio del plantel.','Triple necesita trabajo: 29.3% de conversión limita sus opciones.','Aumentar participación en posiciones de definición sin bajar el VAL colectivo.'],
-   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',
-   rr:'Mayor generador de asistencias del plantel (3.65 AST). Su valor real no está en el box score anotador sino en la organización colectiva. El sistema sufriría sin un base-creador de este perfil.',
-   phl:[{l:'AST',v:'3.65'},{l:'AST%',v:'12.6%'}],
-   pd:'Organizador del equipo: mayor AST del plantel (3.65). Rol de base-creador, no de anotador. Eficiencia sólida (47.8% eFG%, 0.84 PPP). Valor real en la generación colectiva.',pb:'PROM'},
+   sc:[{lv:'Máximo',lc:'amber',bc:'c-amber',lb:'Generación de juego',mt:'AST 3.65 — Nº1 del plantel',dt:'El mejor pasador del equipo. Su valor está en las posesiones que crea para sus compañeros.'},
+       {lv:'Sólida',lc:'blue',bc:'c-blue',lb:'Eficiencia individual',mt:'eFG% 47.8% · PPP 0.84',dt:'Eficiencia consistente toda la temporada. No fuerza el tiro.'},
+       {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'El sistema sufriría sin un base-creador de este perfil.'}],
+   fav:['Mayor generador de asistencias del plantel (3.65 AST).','Eficiencia sólida y consistente a lo largo de toda la temporada.','Doble de dos con buena conversión (51.5% T2%).'],
+   con:['Mejorar tiro libre (69.6%): por debajo del promedio.','Triple necesita trabajo: 29.3% de conversión.','Aumentar participación en posiciones de definición.'],
+   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',rr:'Mayor generador de asistencias del plantel (3.65 AST). Su valor real está en la generación colectiva.',
+   phl:[{l:'AST',v:'3.65'},{l:'AST%',v:'12.6%'}],pd:'Organizador del equipo: mayor AST del plantel (3.65). Rol de base-creador.',pb:'PROM'},
 
   {id:'conti',name:'Conti',full:'Conti, Bruno B.',init:'BC',ab:'#1a1a3a',ac:'#7a7ae8',
-   pj:24,min:23.31,plays:9.40,pts:7.63,ppp:0.81,usg:18.20,efg:44.94,ts:47.53,rtl:12.92,val:7.50,
+   pj:24,min:23.31,plays:9.40,pts:7.63,ppp:0.81,usg:18.20,efg:44.94,val:7.50,
    t2c:1.08,t2i:2.67,t2p:40.63,t3c:1.50,t3i:4.75,t3p:31.58,t1c:0.96,t1i:1.38,t1p:69.70,
    ast:3.33,rd:2.33,ro:0.83,reb:3.17,
    lPts:8.5,lEfg:47.0,lReb:3.5,lVal:8.5,vPts:6.8,vEfg:42.5,vReb:2.8,vVal:6.5,
    lDesc:'Mayor conversión de local; más cómodo en el sistema propio.',vDesc:'Baja marcadamente: PTS -1.7, eFG% -4.5pp, VAL -2.0.',
    bl:[[8.5,46.0,8.5],[7.2,43.0,6.8],[8.8,48.0,9.0],[7.8,45.0,7.5],[6.5,42.0,6.0],[8.5,47.0,8.2],[7.5,44.5,7.8],[7.0,43.5,7.2]],
    pe:{pts:'BAJA',plays:'BAJA',efg:'PROM',ppp:'BAJA'},pp:[42,40,48,38],
-   sc:[
-     {lv:'Medio',lc:'orange',bc:'c-orange',lb:'Impacto colectivo',mt:'AST 3.33 · 24 PJ jugados',dt:'Buen creador (3.33 AST) pero solo jugó 24 partidos, la menor participación entre los titulares.'},
-     {lv:'Baja',lc:'red',bc:'c-red',lb:'Eficiencia individual',mt:'PPP 0.81 · eFG% 44.9%',dt:'El PPP más bajo del plantel entre jugadores de rotación. Toma decisiones de tiro por debajo de su eficiencia real.'},
-     {lv:'Media',lc:'orange',bc:'c-orange',lb:'Recomendación',mt:'EVALUAR',dt:'Perfil útil como sexto hombre pero no como pieza fija. Su continuidad depende de la oferta del mercado.'}
-   ],
-   fav:['Buen creador: AST alto (3.33) para un jugador de su perfil.','Disponible para espaciar el campo desde el perímetro.','24 partidos con participación regular en el sistema.'],
-   con:['Solo 24 PJ: menor participación entre los que integran la rotación.','PPP bajo (0.81) y eFG% (44.9%): necesita mejorar la toma de decisiones.','Tiro libre (69.7%) y triple (31.6%) por debajo del nivel esperado.'],
-   ren:'eval',rl:'EVALUAR',rc:'#e87a4a',
-   rr:'Solo 24 PJ jugados (menor participación entre titulares). PPP bajo (0.81), tiro libre deficiente (69.7%), eficiencia perimetral irregular. Perfil útil como sexto hombre pero no como pieza fija.',
-   phl:[{l:'T3%',v:'31.6%'},{l:'T1%',v:'69.7%'}],
-   pd:'Rol de complemento perimetral. Solo 24 partidos jugados (menor participación entre los titulares). PPP bajo (0.81) con dispersión de tiro irregular.',pb:'PROM'},
+   sc:[{lv:'Medio',lc:'orange',bc:'c-orange',lb:'Impacto colectivo',mt:'AST 3.33 · 24 PJ jugados',dt:'Buen creador (3.33 AST) pero solo jugó 24 partidos, la menor participación entre los titulares.'},
+       {lv:'Baja',lc:'red',bc:'c-red',lb:'Eficiencia individual',mt:'PPP 0.81 · eFG% 44.9%',dt:'El PPP más bajo del plantel entre jugadores de rotación.'},
+       {lv:'Media',lc:'orange',bc:'c-orange',lb:'Recomendación',mt:'EVALUAR',dt:'Perfil útil como sexto hombre pero no como pieza fija.'}],
+   fav:['Buen creador: AST alto (3.33) para su perfil.','Disponible para espaciar el campo desde el perímetro.'],
+   con:['Solo 24 PJ: menor participación entre los que integran la rotación.','PPP bajo (0.81) y eFG% (44.9%): mejorar toma de decisiones.','Triple (31.6%) y libre (69.7%) por debajo del nivel esperado.'],
+   ren:'eval',rl:'EVALUAR',rc:'#e87a4a',rr:'Solo 24 PJ jugados. PPP bajo (0.81), tiro libre deficiente (69.7%). Perfil útil como sexto hombre.',
+   phl:[{l:'T3%',v:'31.6%'},{l:'T1%',v:'69.7%'}],pd:'Rol de complemento perimetral. Solo 24 partidos jugados. PPP bajo (0.81) con dispersión de tiro irregular.',pb:'PROM'},
 
   {id:'roca',name:'Roca',full:'Roca, Thiago E.',init:'TR',ab:'#0a2a1a',ac:'#4ae87a',
-   pj:32,min:18.29,plays:10.22,pts:9.63,ppp:0.94,usg:25.23,efg:52.80,ts:53.84,rtl:9.33,val:5.19,
+   pj:32,min:18.29,plays:10.22,pts:9.63,ppp:0.94,usg:25.23,efg:52.80,val:5.19,
    t2c:1.09,t2i:2.75,t2p:39.77,t3c:2.22,t3i:5.63,t3p:39.44,t1c:0.78,t1i:1.28,t1p:60.98,
    ast:0.56,rd:1.84,ro:0.22,reb:2.06,
    lPts:10.5,lEfg:55.0,lReb:2.2,lVal:6.0,vPts:8.8,vEfg:50.5,vReb:1.9,vVal:4.4,
    lDesc:'Élite ofensivo de local: 55% eFG% en solo 18 min promedio.',vDesc:'Baja eficiencia visitante pero mantiene el triple por encima del 36%.',
    bl:[[8.8,50.0,4.8],[9.5,52.0,5.2],[10.5,56.0,6.0],[9.0,51.5,4.5],[8.5,49.0,4.0],[11.5,58.0,7.0],[10.0,54.0,6.2],[9.8,52.5,4.8]],
    pe:{pts:'ÉLITE',plays:'PROM',efg:'ÉLITE',ppp:'ÉLITE'},pp:[70,50,78,80],
-   sc:[
-     {lv:'Élite',lc:'amber',bc:'c-amber',lb:'Eficiencia por minuto',mt:'eFG% 52.8% · USG% 25.2%',dt:'Genera el mayor impacto por minuto del plantel. Con solo 18.3 MIN promedio, su USG% es el más alto del equipo.'},
-     {lv:'Alto',lc:'green',bc:'c-green',lb:'Rentabilidad (PPP)',mt:'PPP 0.94 — 2º del plantel',dt:'Segundo PPP del equipo. Cada posesión que toma genera casi 1 punto. Triplista élite (39.4%).'},
-     {lv:'Máxima',lc:'amber',bc:'c-amber',lb:'Recomendación',mt:'AMPLIAR ROL',dt:'El jugador más infra-utilizado del plantel. Candidato a 24-26 MIN en playoffs. Ascender a la rotación principal.'}
-   ],
-   fav:['Mejor eFG% entre los rotadores (52.8%): el más eficiente por posesión.','USG% más alto del equipo (25.2%): genera altísimo impacto en su tiempo.','PPP de 0.94: segundo del plantel, solo detrás de Ibarra.','Triplista consistente: 39.4% de conversión, el mejor del equipo.'],
-   con:['Ampliar a 24-26 MIN en playoffs: actualmente sub-utilizado con 18.3 MIN.','Mejorar tiro libre (61%): en momentos de presión necesita ser más confiable.','VAL bajo (5.19) por falta de rebote: compensar con rol más amplio.'],
-   ren:'cond',rl:'AMPLIAR ROL',rc:'#4ab8e8',
-   rr:'El jugador más eficiente del banco: 52.8% eFG%, 0.94 PPP, USG% más alto del equipo (25.2%) en solo 18 MIN. Su VAL (5.19) es bajo por falta de rebote, no por falta de calidad. Merece pasar a 24-26 MIN en playoffs.',
-   phl:[{l:'eFG%',v:'52.8%'},{l:'USG%',v:'25.2%'}],
-   pd:'Joya escondida: mejor eFG% entre los rotadores (52.8%) con el USG% más alto del equipo (25.2%). En 18 minutos genera un impacto desproporcionado.',pb:'ÉLITE PPP'},
+   sc:[{lv:'Élite',lc:'amber',bc:'c-amber',lb:'Eficiencia por minuto',mt:'eFG% 52.8% · USG% 25.2%',dt:'Genera el mayor impacto por minuto del plantel. Con solo 18.3 MIN, su USG% es el más alto del equipo.'},
+       {lv:'Alto',lc:'green',bc:'c-green',lb:'Rentabilidad (PPP)',mt:'PPP 0.94 — 2º del plantel',dt:'Segundo PPP del equipo. Triplista élite (39.4%).'},
+       {lv:'Máxima',lc:'amber',bc:'c-amber',lb:'Recomendación',mt:'AMPLIAR ROL',dt:'El jugador más infra-utilizado del plantel. Candidato a 24-26 MIN en playoffs.'}],
+   fav:['Mejor eFG% entre los rotadores (52.8%): el más eficiente por posesión.','USG% más alto del equipo (25.2%) en solo 18.3 MIN.','Triplista consistente: 39.4% de conversión, el mejor del equipo.'],
+   con:['Ampliar a 24-26 MIN en playoffs: actualmente sub-utilizado.','Mejorar tiro libre (61%): en momentos de presión.','VAL bajo (5.19) por falta de rebote.'],
+   ren:'cond',rl:'AMPLIAR ROL',rc:'#4ab8e8',rr:'El jugador más eficiente del banco: 52.8% eFG%, 0.94 PPP, USG% más alto del equipo (25.2%) en solo 18 MIN.',
+   phl:[{l:'eFG%',v:'52.8%'},{l:'USG%',v:'25.2%'}],pd:'Joya escondida: mejor eFG% entre los rotadores (52.8%) con USG% más alto (25.2%).',pb:'ÉLITE PPP'},
 
   {id:'roveres',name:'Roveres',full:'Roveres, Augusto D.',init:'AR',ab:'#1e1e1e',ac:'#9a9890',
-   pj:32,min:15.88,plays:7.98,pts:8.28,ppp:1.04,usg:22.69,efg:49.31,ts:59.60,rtl:85.42,val:10.81,
+   pj:32,min:15.88,plays:7.98,pts:8.28,ppp:1.04,usg:22.69,efg:49.31,val:10.81,
    t2c:2.13,t2i:4.09,t2p:51.91,t3c:0.06,t3i:0.41,t3p:15.38,t1c:3.84,t1i:5.56,t1p:69.10,
    ast:1.13,rd:2.50,ro:1.75,reb:4.25,
    lPts:9.5,lEfg:52.5,lReb:4.8,lVal:12.5,vPts:7.0,vEfg:46.0,vReb:3.7,vVal:9.0,
    lDesc:'Pívot dominante de local: RTL altísimo y conversión sólida.',vDesc:'Baja el volumen de faltas recibidas; mantiene aporte de rebote.',
    bl:[[9.5,52.0,12.5],[8.0,47.0,10.2],[10.5,54.0,12.8],[8.5,49.5,11.5],[7.2,45.0,9.2],[10.2,53.0,12.2],[8.8,50.0,11.0],[7.0,44.5,8.5]],
    pe:{pts:'PROM',plays:'BAJA',efg:'PROM',ppp:'ÉLITE'},pp:[45,35,55,88],
-   sc:[
-     {lv:'Élite',lc:'amber',bc:'c-amber',lb:'Rentabilidad (PPP)',mt:'PPP 1.04 — 2º del plantel',dt:'El segundo PPP más alto del equipo. Cada posesión es extraordinariamente rentable. Especialista en puntos de alta eficiencia.'},
-     {lv:'Alto',lc:'green',bc:'c-green',lb:'Impacto por minuto',mt:'VAL 10.81 en 15.9 MIN',dt:'VAL alto en muy pocos minutos. RTL% de 85.4%: el pívot que más faltas genera del equipo.'},
-     {lv:'Alta',lc:'blue',bc:'c-blue',lb:'Recomendación',mt:'ROL DEFINIDO',dt:'Necesita 15-18 MIN con rol táctico claro: ataque al aro y rebote. Sin definición, su impacto se diluye.'}
-   ],
-   fav:['PPP de 1.04: segundo del plantel. Altamente rentable en cada posesión.','RTL% de 85.4%: pívot que genera faltas sistemáticamente.','69.1% T1%: convierte la presión en puntos.','VAL de 10.81 en solo 15.9 MIN: impacto por minuto extraordinario.'],
-   con:['Necesita rol claro de 15-18 MIN: sin definición táctica su impacto se diluye.','Tiro libre (69.1%) aceptable pero mejorable para situaciones finales.','Nulo en triple (0.41 intentos por partido): limitación en espacios abiertos.'],
-   ren:'cond',rl:'ROL DEFINIDO',rc:'#4ab8e8',
-   rr:'PPP de 1.04 (segundo del plantel) y 69.1% desde tiro libre. Pívot de energía e impacto puntual. Clave: necesita rol claro (15-18 MIN, ataque al aro). Sin definición táctica, su impacto se diluye.',
-   phl:[{l:'PPP',v:'1.04'},{l:'RTL%',v:'85.4%'}],
-   pd:'Pívot especializado en puntos de 1 (69.1% T1%, mayor del plantel). PPP de 1.04, segundo mejor del equipo. Ataca el aro con eficiencia y recibe faltas con frecuencia.',pb:'ÉLITE T1%'},
+   sc:[{lv:'Élite',lc:'amber',bc:'c-amber',lb:'Rentabilidad (PPP)',mt:'PPP 1.04 — 2º del plantel',dt:'El segundo PPP más alto del equipo. Cada posesión es extraordinariamente rentable.'},
+       {lv:'Alto',lc:'green',bc:'c-green',lb:'Impacto por minuto',mt:'VAL 10.81 en 15.9 MIN',dt:'RTL% de 85.4%: el pívot que más faltas genera del equipo.'},
+       {lv:'Alta',lc:'blue',bc:'c-blue',lb:'Recomendación',mt:'ROL DEFINIDO',dt:'Necesita 15-18 MIN con rol táctico claro: ataque al aro y rebote.'}],
+   fav:['PPP de 1.04: segundo del plantel. Altamente rentable en cada posesión.','RTL% de 85.4%: pívot que genera faltas sistemáticamente.','VAL de 10.81 en solo 15.9 MIN.'],
+   con:['Necesita rol claro de 15-18 MIN: sin definición su impacto se diluye.','Tiro libre (69.1%) mejorable para situaciones finales.','Nulo en triple: limitación en espacios abiertos.'],
+   ren:'cond',rl:'ROL DEFINIDO',rc:'#4ab8e8',rr:'PPP de 1.04 (segundo del plantel). Pívot de energía e impacto puntual. Necesita rol claro.',
+   phl:[{l:'PPP',v:'1.04'},{l:'RTL%',v:'85.4%'}],pd:'Pívot especializado en puntos de 1 (69.1% T1%). PPP de 1.04, segundo mejor del equipo.',pb:'ÉLITE T1%'},
+
+  {id:'nesman',name:'Nesman',full:'Nesman Ibañez, Santiago J.',init:'SN',ab:'#1a2a10',ac:'#b07ae8',
+   pj:32,min:8.83,plays:1.96,pts:1.31,ppp:0.67,usg:10.04,efg:39.36,val:1.97,
+   t2c:0.34,t2i:0.75,t2p:45.83,t3c:0.16,t3i:0.72,t3p:21.74,t1c:0.16,t1i:0.34,t1p:45.45,
+   ast:0.34,rd:1.09,ro:0.59,reb:1.69,
+   lPts:1.6,lEfg:42.0,lReb:1.9,lVal:2.4,vPts:1.0,vEfg:36.5,vReb:1.4,vVal:1.5,
+   lDesc:'Mayor aporte cuando juega de local: más contacto y rebote.',vDesc:'Rol puramente testimonial: menos de 2 jugadas por partido.',
+   bl:[[1.2,38.0,1.8],[0.8,35.0,1.2],[1.8,42.0,2.5],[1.5,40.5,2.2],[1.0,36.0,1.5],[1.8,43.0,2.8],[1.5,39.5,2.0],[1.2,38.5,1.8]],
+   pe:{pts:'BAJA',plays:'BAJA',efg:'BAJA',ppp:'BAJA'},pp:[12,8,28,30],
+   sc:[{lv:'Mínimo',lc:'red',bc:'c-red',lb:'Impacto colectivo',mt:'1.96 PLAYS · 8.83 MIN',dt:'El jugador con menor participación ofensiva del plantel. La muestra estadística es demasiado pequeña para extraer conclusiones firmes.'},
+       {lv:'Limitada',lc:'purple',bc:'c-purple',lb:'Eficiencia disponible',mt:'eFG% 39.4% · PPP 0.67',dt:'Baja eficiencia, pero con la condicionante de que casi no recibe posesiones. Difícil evaluar su techo real.'},
+       {lv:'Especial',lc:'blue',bc:'c-blue',lb:'Rol en el equipo',mt:'Defensa + actitud',dt:'Su aporte real no está en las estadísticas: es un elemento de roster que cubre lesiones y da descanso en situaciones de bajo riesgo.'}],
+   fav:['Presencia defensiva útil cuando el equipo necesita rotar.','Rebote ofensivo (0.59) aceptable para su tiempo en cancha.','Actitud y rol de banco que contribuye al clima grupal.'],
+   con:['1.96 PLAYS por partido: muestra insuficiente para evaluación técnica real.','eFG% de 39.4% y PPP de 0.67: los más bajos del plantel.','Tiro libre (45.5%) y triple (21.7%) muy por debajo del nivel mínimo requerido.','Su perfil ofensivo necesita trabajo de base antes de asumir más rol.'],
+   ren:'no',rl:'MUESTRA INSUFICIENTE',rc:'#9a9890',rr:'Con 8.83 MIN y 1.96 PLAYS por partido, la muestra estadística es insuficiente para un veredicto técnico. Su valor es de roster y actitudinal.',
+   phl:[{l:'RD',v:'1.09'},{l:'RO',v:'0.59'}],pd:'Rol testimonial (8.83 MIN, 1.96 PLAYS). Muestra estadística insuficiente para evaluar. Su aporte principal es defensivo y de actitud grupal.',pb:'ROL MÍNIMO'},
 
   {id:'fornes',name:'Fornes',full:'Fornes, Francisco',init:'FF',ab:'#2a1a1a',ac:'#e84a4a',
-   pj:32,min:13.23,plays:2.92,pts:2.69,ppp:0.92,usg:9.98,efg:53.29,ts:54.07,rtl:6.58,val:3.78,
+   pj:32,min:13.23,plays:2.92,pts:2.69,ppp:0.92,usg:9.98,efg:53.29,val:3.78,
    t2c:0.66,t2i:1.19,t2p:55.26,t3c:0.41,t3i:1.19,t3p:34.21,t1c:0.16,t1i:0.25,t1p:62.50,
    ast:0.44,rd:2.56,ro:1.09,reb:3.66,
    lPts:3.0,lEfg:55.0,lReb:4.0,lVal:4.2,vPts:2.4,vEfg:51.5,vReb:3.4,vVal:3.4,
-   lDesc:'Mayor aporte de local; eficiencia sostenida cuando juega.',vDesc:'Rol mínimo: muy bajo volumen para extraer conclusiones sólidas.',
+   lDesc:'Mayor aporte de local; eficiencia sostenida cuando juega.',vDesc:'Rol mínimo: muy bajo volumen para extraer conclusiones.',
    bl:[[2.5,52.0,3.5],[2.8,54.0,4.0],[3.2,56.0,4.5],[2.5,52.5,3.8],[2.2,50.0,3.2],[3.5,58.0,5.0],[2.8,53.5,4.0],[2.5,51.0,3.5]],
    pe:{pts:'BAJA',plays:'BAJA',efg:'ÉLITE',ppp:'PROM'},pp:[18,12,80,55],
-   sc:[
-     {lv:'Buena',lc:'blue',bc:'c-blue',lb:'Eficiencia (cuando tira)',mt:'eFG% 53.3% · T2% 55.3%',dt:'Cuando recibe posesiones, las aprovecha bien. El problema es que recibe muy pocas (2.92 PLAYS por partido).'},
-     {lv:'Bajo',lc:'red',bc:'c-red',lb:'Impacto colectivo',mt:'2.69 PTS · 2.92 PLAYS',dt:'Volumen mínimo. Muestra estadística insuficiente para evaluar el impacto real. Su mayor aporte relativo es el rebote.'},
-     {lv:'Baja',lc:'red',bc:'c-red',lb:'Recomendación',mt:'NO PRIORITARIO',dt:'No justifica renovación prioritaria salvo por contexto salarial favorable. El rebote (3.66) es su único diferencial visible.'}
-   ],
-   fav:['eFG% de 53.3%: cuando tira, lo hace con buena eficiencia.','Rebote (3.66) alto para el tiempo de juego que recibe.','Versátil: puede cubrir distintas posiciones sin grandes costos.'],
-   con:['2.92 PLAYS: muestra estadística insuficiente para evaluación seria.','No justifica renovación prioritaria salvo por contexto salarial favorable.','Su rol de banco de emergencia puede cubrirse con otras alternativas.'],
-   ren:'no',rl:'NO PRIORITARIO',rc:'#e84a4a',
-   rr:'2.92 PLAYS por partido. Muestra estadística insuficiente para evaluar con seriedad. El rebote relativo es su único diferencial visible. No justifica una renovación prioritaria salvo como jugador de plantel por contexto salarial.',
-   phl:[{l:'eFG%',v:'53.3%'},{l:'PLAYS',v:'2.92'}],
-   pd:'Volumen mínimo (2.9 PLAYS). La muestra es pequeña para evaluar eficiencia (53.3% eFG%). Rol de último recurso del banco. Los rebotes (3.66) son su mayor aporte relativo.',pb:'ROL MÍNIMO'}
+   sc:[{lv:'Buena',lc:'blue',bc:'c-blue',lb:'Eficiencia (cuando tira)',mt:'eFG% 53.3% · T2% 55.3%',dt:'Cuando recibe posesiones las aprovecha bien. El problema es que recibe muy pocas.'},
+       {lv:'Bajo',lc:'red',bc:'c-red',lb:'Impacto colectivo',mt:'2.69 PTS · 2.92 PLAYS',dt:'Volumen mínimo. Su mayor aporte relativo es el rebote.'},
+       {lv:'Baja',lc:'red',bc:'c-red',lb:'Recomendación',mt:'NO PRIORITARIO',dt:'No justifica renovación prioritaria salvo por contexto salarial favorable.'}],
+   fav:['eFG% de 53.3%: cuando tira, lo hace con buena eficiencia.','Rebote (3.66) alto para el tiempo de juego que recibe.'],
+   con:['2.92 PLAYS: muestra estadística insuficiente.','No justifica renovación prioritaria.'],
+   ren:'no',rl:'NO PRIORITARIO',rc:'#e84a4a',rr:'2.92 PLAYS por partido. Muestra estadística insuficiente. El rebote relativo es su único diferencial visible.',
+   phl:[{l:'eFG%',v:'53.3%'},{l:'PLAYS',v:'2.92'}],pd:'Volumen mínimo (2.9 PLAYS). Rol de último recurso del banco.',pb:'ROL MÍNIMO'}
 ];
 
-const COLORS=['#4ab8e8','#4ae87a','#e87a4a','#c87aaa','#e8c84a','#7a7ae8','#4ae87a','#9a9890','#e84a4a'];
-let page='players', active=P[0].id, charts=[];
+const COLORS=['#4ab8e8','#4ae87a','#e87a4a','#c87aaa','#e8c84a','#7a7ae8','#4ae87a','#9a9890','#b07ae8','#e84a4a'];
+let page='team', active=P[0].id, charts=[];
 
 // TOP NAV
 document.getElementById('topNav').addEventListener('click',e=>{
@@ -349,7 +352,6 @@ document.getElementById('topNav').addEventListener('click',e=>{
   render();
 });
 
-// PLAYER NAV
 function buildNav(){
   const nav=document.getElementById('playerNav'); nav.innerHTML='';
   P.forEach(p=>{
@@ -364,22 +366,239 @@ buildNav();
 
 function render(){
   charts.forEach(c=>c.destroy()); charts=[];
-  if(page==='players') renderPlayer(P.find(x=>x.id===active));
+  if(page==='team') renderTeam();
+  else if(page==='players') renderPlayer(P.find(x=>x.id===active));
   else renderSummary();
 }
 
-// HELPERS
 function bdg(s){
   if(s==='ÉLITE') return `<span class="badge-e">ÉLITE ✦</span>`;
   if(s==='BAJA') return `<span class="badge-l">BAJA ↓</span>`;
   return `<span class="badge-p">PROM</span>`;
 }
-function rcls(r){return{si:'r-si',cond:'r-cond',eval:'r-eval',no:'r-no'}[r];}
+function rcls(r){return{si:'r-si',cond:'r-cond',eval:'r-eval',no:'r-no'}[r]||'r-eval';}
 function pbar(pct,col){return `<div class="pos-track"><div class="pos-bar" style="width:${pct}%;background:${col};"></div></div>`;}
 function efgClr(v){return v>=52?'var(--green)':v>=47?'var(--accent)':'var(--orange)';}
-function pppClr(v){return v>=1.0?'var(--green)':v>=0.85?'var(--accent)':'var(--red)';}
 
+// ============================================================
+// TEAM PAGE
+// ============================================================
+function renderTeam(){
+  document.getElementById('mainContent').innerHTML=`
+  <!-- STANDING -->
+  <div class="scard" style="margin-bottom:14px;">
+    <div class="scard-title">Posición final · Tabla de posiciones</div>
+    <div class="standing-row header">
+      <span>Pos</span><span>Equipo</span><span style="text-align:right;">G-P</span><span style="text-align:right;">PF</span><span style="text-align:right;">% V</span>
+    </div>
+    ${[
+      ['1','AMANCAY (LR)','23-9','2495','71.8',false],
+      ['2','SAN ISIDRO','23-9','2661','71.8',false],
+      ['3','BARRIO PARQUE','21-11','2600','65.6',false],
+      ['4','SP. SUARDI','20-12','2701','62.5',false],
+      ['5','SANTA PAULA (G)','19-13','2701','59.3',false],
+      ['6','COMUNICACIONES','18-14','2647','56.2',false],
+      ['7','SALTA BASKET','18-14','2593','56.2',false],
+      ['8','JUJUY BÁSQUET','17-15','2599','53.1',true],
+      ['9','VILLA SAN MARTÍN','16-16','2349','50.0',false],
+      ['10','ESTUDIANTES (T)','16-16','2558','50.0',false],
+      ['11','BOCHAS (CC)','15-17','2524','46.8',false],
+      ['12','INDEPENDIENTE (SDE)','14-18','2611','43.7',false],
+    ].map(r=>`<div class="standing-row${r[5]?' highlight':''}">
+      <span style="font-family:var(--head);font-weight:700;color:${r[5]?'var(--accent)':'var(--text3)'};">${r[0]}</span>
+      <span style="color:${r[5]?'var(--text)':'var(--text2)'};">${r[1]}</span>
+      <span style="text-align:right;color:${r[5]?'var(--accent)':'var(--text3)'};">${r[2]}</span>
+      <span style="text-align:right;color:var(--text3);">${r[3]}</span>
+      <span style="text-align:right;color:${r[5]?'var(--green)':'var(--text3)'};">${r[4]}%</span>
+    </div>`).join('')}
+  </div>
+
+  <!-- KPI STRIP -->
+  <div class="team-kpi-strip">
+    <div class="team-kpi" style="border-top:3px solid var(--accent);">
+      <div class="team-kpi-val" style="color:var(--accent);">Nº 1</div>
+      <div class="team-kpi-lbl">RO% de la liga</div>
+      <div class="team-kpi-sub">30.32% rebote ofensivo<br>El único factor donde son líderes absolutos</div>
+    </div>
+    <div class="team-kpi" style="border-top:3px solid var(--green);">
+      <div class="team-kpi-val" style="color:var(--green);">Nº 1</div>
+      <div class="team-kpi-lbl">PLAYS de la liga</div>
+      <div class="team-kpi-sub">90.01 jugadas/partido<br>El equipo que más posesiones genera</div>
+    </div>
+    <div class="team-kpi" style="border-top:3px solid var(--accent2);">
+      <div class="team-kpi-val" style="color:var(--accent2);">Nº 1</div>
+      <div class="team-kpi-lbl">PP Opp% (défens.)</div>
+      <div class="team-kpi-sub">15.83% pérdidas forzadas<br>Mejor defensa generando errores rivales</div>
+    </div>
+    <div class="team-kpi" style="border-top:3px solid var(--red);">
+      <div class="team-kpi-val" style="color:var(--red);">Nº 17</div>
+      <div class="team-kpi-lbl">eFG% ofensivo</div>
+      <div class="team-kpi-sub">49.27% — último de la liga<br>La deuda pendiente más crítica</div>
+    </div>
+  </div>
+
+  <!-- LOS 4 FACTORES QUE EXPLICAN EL 8vo PUESTO -->
+  <div class="scard" style="margin-bottom:14px;">
+    <div class="scard-title">¿Por qué terminaron 8vos? Los 4 factores clave</div>
+    <div class="factor-row">
+      <div class="factor-icon">🏀</div>
+      <div>
+        <div class="factor-title">Dominio absoluto en rebote ofensivo <span class="rank-badge rank-1">RANK 1</span></div>
+        <div class="factor-body">Con un RO% de 30.32%, fueron los mejores de la liga capturando segundas oportunidades. Mientras la liga promedia 22.5%, Jujuy superó ese valor en casi 8 puntos porcentuales. Grytsak (3.81 RO por partido) y Stehli (1.50 RO) fueron los motores de este sistema. Esta métrica compensó directamente su baja eficiencia de tiro: cuando no convierten en el primer intento, buscan la segunda oportunidad.</div>
+      </div>
+    </div>
+    <div class="factor-row">
+      <div class="factor-icon">⚡</div>
+      <div>
+        <div class="factor-title">Mayor volumen de posesiones de la liga <span class="rank-badge rank-1">RANK 1</span></div>
+        <div class="factor-body">90.01 PLAYS por partido vs. 83.33 del equipo tipo de la liga. Al generar más posesiones que cualquier otro equipo, logran que su eficiencia baja (0.90 PPP, 17° de la liga) tenga menos impacto relativo: si un equipo genera 15 posesiones extra por partido a 0.90 PPP, eso equivale a 13.5 puntos adicionales. El volumen es su principal ecualizador.</div>
+      </div>
+    </div>
+    <div class="factor-row">
+      <div class="factor-icon">🛡️</div>
+      <div>
+        <div class="factor-title">Líder en pérdidas forzadas al rival <span class="rank-badge rank-1">RANK 1</span></div>
+        <div class="factor-body">15.83% de las posesiones rivales terminaron en pérdida (vs. 13.70% del equipo tipo). Esta presión defensiva tiene dos efectos: acorta las posesiones rivales y genera transiciones rápidas donde el ritmo de Jujuy se activa. PP% propias del 12.71% (4° de la liga), lo que significa que cuidan bien el balón pese a jugar tan rápido.</div>
+      </div>
+    </div>
+    <div class="factor-row">
+      <div class="factor-icon">🎯</div>
+      <div>
+        <div class="factor-title">2° equipo con mayor frecuencia de triple <span class="rank-badge rank-top">RANK 2</span></div>
+        <div class="factor-body">38.40% de sus jugadas terminan en intento de triple. Aunque su conversión es apenas promedio (32.19%), el volumen de intentos (34.56 por partido, el mayor de la liga) les permite anotar 11.13 triples por partido. La dependencia del perímetro tiene un costo: cuando los triples no caen, la ofensiva se estanca.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRONOLOGÍA POR BLOQUES -->
+  <div class="scard" style="margin-bottom:14px;">
+    <div class="scard-title">Evolución por bloques de 4 partidos · Record + métricas clave</div>
+    <div class="cycle-grid">
+      <div class="cycle-card asc">
+        <div class="cycle-head">🏀 B1–B2: Adaptación y Explosión <span class="rank-badge rank-top" style="font-size:9px;">4-4</span></div>
+        <div class="cycle-rec" style="color:var(--green);">Partidos 1–8 · Balance 4-4</div>
+        <div class="cycle-body">El equipo busca su identidad. RO% todavía inconsistente. Mayor pérdida propia del ciclo (14.5%). La victoria ante Independiente SDE (V) fue el primer indicio de lo que vendría. B2 muestra el ritmo más alto (PACE 79.5): el equipo comienza a correr la cancha de manera sistemática.</div>
+      </div>
+      <div class="cycle-card mes">
+        <div class="cycle-head">🔥 B3–B4: Pico de Identidad <span class="rank-badge rank-top" style="font-size:9px;">3-5</span></div>
+        <div class="cycle-rec" style="color:var(--accent);">Partidos 9–16 · Balance 3-5</div>
+        <div class="cycle-body">B4 marca el pico de RO% (33.5%). Ciclo de definición táctica con victorias clave ante Hindú C (90-74) y Comunicaciones (68-63). El sistema defensivo de pérdidas forzadas llega a su máximo en B3 (18.2% PP Opp%). Bloque de afirmación de la identidad colectiva.</div>
+      </div>
+      <div class="cycle-card sta">
+        <div class="cycle-head">🎯 B5–B6: Mejora de eficiencia <span class="rank-badge rank-mid" style="font-size:9px;">5-3</span></div>
+        <div class="cycle-rec" style="color:var(--accent2);">Partidos 17–24 · Balance 5-3</div>
+        <div class="cycle-body">Mejor tramo de la temporada en victorias (5-3). B6 marca el pico triplero: 42.1% de frecuencia desde 3, con 3 victorias seguidas de local. La localía se convierte en fortaleza. RO% cae al 24.8% en B5, compensado por mayor eficiencia anotadora en B6.</div>
+      </div>
+      <div class="cycle-card dec">
+        <div class="cycle-head">🐢 B7–B8: Fatiga y Caída <span class="rank-badge rank-bot" style="font-size:9px;">3-5</span></div>
+        <div class="cycle-rec" style="color:var(--red);">Partidos 25–32 · Balance 3-5</div>
+        <div class="cycle-body">PACE cae al mínimo de temporada (73.0). El equipo muestra signos de desgaste físico. Derrotas ante San Isidro y Comunicaciones en la recta final limitan las aspiraciones. Las defensas contrarias ya conocen el sistema y ajustan sobre los triplistas.</div>
+      </div>
+    </div>
+    <div style="position:relative;height:200px;"><canvas id="teamChart" role="img" aria-label="Evolución del equipo por bloques"></canvas></div>
+    <div style="display:flex;gap:16px;margin-top:10px;font-size:10px;color:var(--text3);font-family:var(--mono);">
+      <span><span style="display:inline-block;width:12px;height:2px;background:#e8c84a;vertical-align:middle;margin-right:3px;"></span>PPP (×10)</span>
+      <span><span style="display:inline-block;width:12px;height:2px;border-top:2px dashed #e84a7a;vertical-align:middle;margin-right:3px;background:none;"></span>RO%</span>
+      <span><span style="display:inline-block;width:8px;height:8px;background:rgba(74,184,232,0.3);border:1px solid #4ab8e8;vertical-align:middle;margin-right:3px;border-radius:2px;"></span>PT3% (frecuencia)</span>
+    </div>
+  </div>
+
+  <!-- LOCALÍA VS VISITA -->
+  <div class="grid2" style="margin-bottom:14px;">
+    <div class="scard">
+      <div class="scard-title">Localía — Jujuy como local</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="background:var(--surface2);border-radius:6px;padding:10px;">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:4px;">RECORD LOCAL</div>
+          <div style="font-family:var(--head);font-size:24px;font-weight:800;color:var(--green);">11-5</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">68.75% de victorias</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px;">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:4px;">RECORD VISITANTE</div>
+          <div style="font-family:var(--head);font-size:24px;font-weight:800;color:var(--orange);">6-10</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">37.5% de victorias</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.6;">La localía fue determinante: sin el dominio de local (11-5), el equipo no habría alcanzado el 8vo puesto. La diferencia de rendimiento entre local y visitante refleja la dependencia del ritmo propio y del apoyo del público para sostener el juego de alta intensidad.</div>
+    </div>
+    <div class="scard">
+      <div class="scard-title">Perfil ofensivo: ligero vs. liga promedio</div>
+      <div class="pos-row"><span class="pos-lbl">RO%</span>${pbar(100,'var(--accent)')}<span class="pos-val" style="color:var(--accent);">30.3%</span><span class="rank-badge rank-1" style="font-size:8px;">R1</span></div>
+      <div class="pos-row"><span class="pos-lbl">PLAYS</span>${pbar(95,'var(--green)')}<span class="pos-val" style="color:var(--green);">90.0</span><span class="rank-badge rank-1" style="font-size:8px;">R1</span></div>
+      <div class="pos-row"><span class="pos-lbl">PP Opp%</span>${pbar(92,'var(--accent2)')}<span class="pos-val" style="color:var(--accent2);">15.8%</span><span class="rank-badge rank-1" style="font-size:8px;">R1</span></div>
+      <div class="pos-row"><span class="pos-lbl">PT3%</span>${pbar(85,'var(--purple)')}<span class="pos-val" style="color:var(--purple);">38.4%</span><span class="rank-badge rank-top" style="font-size:8px;">R2</span></div>
+      <div class="pos-row"><span class="pos-lbl">eFG%</span>${pbar(15,'var(--red)')}<span class="pos-val" style="color:var(--red);">49.3%</span><span class="rank-badge rank-bot" style="font-size:8px;">R17</span></div>
+      <div class="pos-row"><span class="pos-lbl">PPP</span>${pbar(12,'var(--red)')}<span class="pos-val" style="color:var(--red);">0.90</span><span class="rank-badge rank-bot" style="font-size:8px;">R17</span></div>
+    </div>
+  </div>
+
+  <!-- OPTIMIZACIÓN REAL -->
+  <div class="scard">
+    <div class="scard-title">Condiciones de optimización — Desde lo real, no lo ideal</div>
+    <div class="optim-row">
+      <div class="optim-dot" style="background:var(--accent);"></div>
+      <div>
+        <div class="optim-title">Mejorar eFG% de 49.3% a 52-53% <span class="rank-badge rank-top" style="font-size:8px;">PRIORITARIO</span></div>
+        <div class="optim-body">Es el cambio más realista con mayor impacto. La diferencia entre el equipo tipo (52.45%) y Jujuy (49.27%) equivale a ~4 puntos por partido. No requiere cambiar la filosofía: solo mejorar el %T2 (actualmente 17°, 49.95%) a través de selección de tiro más inteligente. Ibarra (63.7% T2%) debe recibir más posesiones de media distancia.</div>
+      </div>
+    </div>
+    <div class="optim-row">
+      <div class="optim-dot" style="background:var(--green);"></div>
+      <div>
+        <div class="optim-title">Mantener el RO% y añadir conversión real <span class="rank-badge rank-top" style="font-size:8px;">FORTALEZA A CONSERVAR</span></div>
+        <div class="optim-body">El dominio del rebote ofensivo (Rank 1) ya está instalado como cultura. El paso siguiente es que esas segundas oportunidades terminen en tiros de mayor calidad. Actualmente 30.32% de RO con 0.90 PPP da resultado. Con 0.94 PPP daría clasificación directa a cuartos.</div>
+      </div>
+    </div>
+    <div class="optim-row">
+      <div class="optim-dot" style="background:var(--accent2);"></div>
+      <div>
+        <div class="optim-title">Equilibrar local/visitante: de 11-5 y 6-10 a 13-3 / 8-8 <span class="rank-badge rank-mid" style="font-size:8px;">ALCANZABLE</span></div>
+        <div class="optim-body">La brecha de rendimiento entre local (68.75%) y visitante (37.5%) es excesiva. El sistema de ritmo alto funciona bien de local donde el equipo controla el juego. De visitante necesita mayor adaptación táctica: bajar el ritmo cuando el rival lo impone y mejorar la eficiencia perimetral visitante (los triplistas caen ~5pp fuera de casa).</div>
+      </div>
+    </div>
+    <div class="optim-row">
+      <div class="optim-dot" style="background:var(--orange);"></div>
+      <div>
+        <div class="optim-title">Gestionar la carga física en bloques 7-8 <span class="rank-badge rank-mid" style="font-size:8px;">GESTIÓN INTERNA</span></div>
+        <div class="optim-body">La caída de rendimiento en B7-B8 (de 5-3 a 3-5) sugiere desgaste acumulado. Stehli promedia 31+ MIN, Grytsak 26.5 MIN con alto desgaste físico por el rebote. Implementar rotaciones más amplias de 8-9 jugadores activos en el tramo final permitiría llegar a playoffs con mayor frescura física.</div>
+      </div>
+    </div>
+    <div class="optim-row" style="border-bottom:none;">
+      <div class="optim-dot" style="background:var(--purple);"></div>
+      <div>
+        <div class="optim-title">Reducir la dependencia del triple de visitante <span class="rank-badge rank-mid" style="font-size:8px;">TÁCTICA</span></div>
+        <div class="optim-body">38.4% de frecuencia de triple (2° de la liga) con 32.19% de conversión es sostenible de local. De visitante la conversión cae y el equipo no tiene Plan B. Desarrollar el juego de dobles de Ibarra (63.7% T2%) y Roveres (PPP 1.04 en ataque al aro) como opciones primarias en partidos visitantes reduce la volatilidad ofensiva.</div>
+      </div>
+    </div>
+  </div>`;
+
+  // Team chronology chart
+  const ctx=document.getElementById('teamChart');
+  if(!ctx) return;
+  const ppp=[8.7,8.8,9.4,9.6,8.6,9.9,9.2,8.3].map(v=>+(v).toFixed(1));
+  const ro=[28.5,29.2,30.8,33.5,24.8,28.2,29.5,27.8];
+  const pt3=[31.0,36.5,38.5,36.8,35.2,42.1,38.5,37.8];
+  const ch=new Chart(ctx,{
+    type:'bar',
+    data:{labels:['B1','B2','B3','B4','B5','B6','B7','B8'],datasets:[
+      {type:'bar',label:'PT3%',data:pt3,backgroundColor:'rgba(74,184,232,0.25)',borderColor:'#4ab8e8',borderWidth:1,borderRadius:3,yAxisID:'y'},
+      {type:'line',label:'PPP×10',data:ppp,borderColor:'#e8c84a',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#e8c84a',tension:0.3,yAxisID:'y'},
+      {type:'line',label:'RO%',data:ro,borderColor:'#e84a7a',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#e84a7a',tension:0.3,yAxisID:'y'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'#1e2230',titleColor:'#9a9890',bodyColor:'#f0eee8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1}},
+      scales:{
+        x:{ticks:{color:'#5a5856',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},
+        y:{min:0,max:45,ticks:{color:'#5a5856',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}
+      }
+    }
+  });
+  charts.push(ch);
+}
+
+// ============================================================
 // PLAYER PAGE
+// ============================================================
 function renderPlayer(p){
   const tot=p.t2i+p.t3i+p.t1i;
   const t2p=tot>0?(p.t2i/tot*100).toFixed(1):0;
@@ -417,13 +636,7 @@ function renderPlayer(p){
   </div>
 
   <div class="scorecard-row">
-    ${p.sc.map(s=>`
-    <div class="sc-box ${s.bc}">
-      <div class="sc-level ${s.lc}">${s.lv}</div>
-      <div class="sc-label">${s.lb}</div>
-      <div class="sc-metric">${s.mt}</div>
-      <div class="sc-detail">${s.dt}</div>
-    </div>`).join('')}
+    ${p.sc.map(s=>`<div class="sc-box ${s.bc}"><div class="sc-level ${s.lc}">${s.lv}</div><div class="sc-label">${s.lb}</div><div class="sc-metric">${s.mt}</div><div class="sc-detail">${s.dt}</div></div>`).join('')}
   </div>
 
   <div class="grid2">
@@ -435,12 +648,8 @@ function renderPlayer(p){
       <div class="pos-row"><span class="pos-lbl">PPP</span>${pbar(p.pp[3],'#e87a4a')}<span class="pos-val">${p.ppp.toFixed(2)}</span>${bdg(p.pe.ppp)}</div>
       <div style="border-top:1px solid var(--border);margin-top:9px;padding-top:9px;">
         <div class="scard-title" style="margin-bottom:7px;">Rebotes</div>
-        <div class="pos-row">
-          <span class="pos-lbl">RD (def)</span>${pbar(Math.min(p.rd/6*100,100),'#e87a4a')}<span class="pos-val">${p.rd.toFixed(1)}</span>
-        </div>
-        <div class="pos-row">
-          <span class="pos-lbl">RO (of)</span>${pbar(Math.min(p.ro/4.5*100,100),'#e84a7a')}<span class="pos-val">${p.ro.toFixed(1)}</span>
-        </div>
+        <div class="pos-row"><span class="pos-lbl">RD (def)</span>${pbar(Math.min(p.rd/6*100,100),'#e87a4a')}<span class="pos-val">${p.rd.toFixed(1)}</span></div>
+        <div class="pos-row"><span class="pos-lbl">RO (of)</span>${pbar(Math.min(p.ro/4.5*100,100),'#e84a7a')}<span class="pos-val">${p.ro.toFixed(1)}</span></div>
       </div>
     </div>
     <div class="scard">
@@ -526,26 +735,22 @@ function renderPlayer(p){
 
   const ctx=document.getElementById('bc');
   if(!ctx) return;
-  const ch=new Chart(ctx,{
-    type:'bar',
-    data:{labels:['B1','B2','B3','B4','B5','B6','B7','B8'],datasets:[
-      {type:'bar',label:'VAL',data:p.bl.map(b=>b[2]),backgroundColor:'rgba(232,200,74,0.15)',borderColor:'#e8c84a',borderWidth:1,borderRadius:3,yAxisID:'y'},
-      {type:'line',label:'PTS',data:p.bl.map(b=>b[0]),borderColor:'#4ab8e8',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#4ab8e8',tension:0.3,yAxisID:'y'},
-      {type:'line',label:'eFG%×30',data:p.bl.map(b=>+(b[1]/3).toFixed(2)),borderColor:'#4ae87a',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#4ae87a',tension:0.3,yAxisID:'y'}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{backgroundColor:'#1e2230',titleColor:'#9a9890',bodyColor:'#f0eee8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,
-        callbacks:{label:c=>c.dataset.label==='eFG%×30'?'eFG%: '+(c.raw*3).toFixed(1)+'%':c.dataset.label+': '+c.raw}}},
-      scales:{
-        x:{ticks:{color:'#5a5856',font:{size:9,family:"'DM Mono',monospace"}},grid:{color:'rgba(255,255,255,0.04)'}},
-        y:{min:0,max:20,ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}}
-      }
-    }
-  });
+  const ch=new Chart(ctx,{type:'bar',data:{labels:['B1','B2','B3','B4','B5','B6','B7','B8'],datasets:[
+    {type:'bar',label:'VAL',data:p.bl.map(b=>b[2]),backgroundColor:'rgba(232,200,74,0.15)',borderColor:'#e8c84a',borderWidth:1,borderRadius:3,yAxisID:'y'},
+    {type:'line',label:'PTS',data:p.bl.map(b=>b[0]),borderColor:'#4ab8e8',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#4ab8e8',tension:0.3,yAxisID:'y'},
+    {type:'line',label:'eFG%×30',data:p.bl.map(b=>+(b[1]/3).toFixed(2)),borderColor:'#4ae87a',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#4ae87a',tension:0.3,yAxisID:'y'}
+  ]},options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{backgroundColor:'#1e2230',titleColor:'#9a9890',bodyColor:'#f0eee8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,
+      callbacks:{label:c=>c.dataset.label==='eFG%×30'?'eFG%: '+(c.raw*3).toFixed(1)+'%':c.dataset.label+': '+c.raw}}},
+    scales:{x:{ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
+      y:{min:0,max:20,ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}}}
+  }});
   charts.push(ch);
 }
 
+// ============================================================
 // SUMMARY PAGE
+// ============================================================
 function renderSummary(){
   const names=P.map(p=>p.name);
   document.getElementById('mainContent').innerHTML=`
@@ -553,7 +758,7 @@ function renderSummary(){
     <div class="sum-title">Gráficos comparativos del plantel</div>
     <div class="chart-card">
       <div class="chart-card-title">Ranking PTS · Fase regular — todos los jugadores</div>
-      <div style="position:relative;height:260px;"><canvas id="c1" role="img" aria-label="Ranking PTS todos los jugadores"></canvas></div>
+      <div style="position:relative;height:240px;"><canvas id="c1" role="img" aria-label="Ranking PTS"></canvas></div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
         ${P.map((p,i)=>`<span style="display:flex;align-items:center;gap:3px;font-family:var(--mono);font-size:9px;color:var(--text3);"><span style="width:7px;height:7px;border-radius:2px;background:${COLORS[i]};display:inline-block;"></span>${p.name}</span>`).join('')}
       </div>
@@ -561,11 +766,11 @@ function renderSummary(){
     <div class="grid2">
       <div class="chart-card" style="margin-bottom:0;">
         <div class="chart-card-title">eFG% vs Rentabilidad (PPP) · tamaño = PLAYS</div>
-        <div style="position:relative;height:240px;"><canvas id="c2" role="img" aria-label="eFG vs PPP scatter"></canvas></div>
+        <div style="position:relative;height:230px;"><canvas id="c2" role="img" aria-label="eFG vs PPP"></canvas></div>
       </div>
       <div class="chart-card" style="margin-bottom:0;">
         <div class="chart-card-title">Volumen (PLAYS) vs VAL</div>
-        <div style="position:relative;height:240px;"><canvas id="c3" role="img" aria-label="PLAYS vs VAL"></canvas></div>
+        <div style="position:relative;height:230px;"><canvas id="c3" role="img" aria-label="PLAYS vs VAL"></canvas></div>
       </div>
     </div>
   </div>
@@ -579,10 +784,8 @@ function renderSummary(){
           <div class="pf-avatar" style="background:${p.ab};color:${p.ac};">${p.init}</div>
           <div>
             <div class="pf-name">${p.full}</div>
-            <div class="pf-sub">
-              <span>${p.pj} PJ · ${p.min.toFixed(1)} MIN</span>
-              <span class="${p.pb.includes('ÉLITE')?'badge-e':p.pb.includes('MÍNIMO')?'badge-l':'badge-p'}">${p.pb}</span>
-            </div>
+            <div class="pf-sub"><span>${p.pj} PJ · ${p.min.toFixed(1)} MIN</span>
+              <span class="${p.pb.includes('ÉLITE')?'badge-e':p.pb.includes('MÍNIMO')||p.pb.includes('INSUFI')?'badge-l':'badge-p'}">${p.pb}</span></div>
           </div>
         </div>
         <div class="pf-stats">
@@ -603,21 +806,15 @@ function renderSummary(){
 
   <div>
     <div class="sum-title">Veredictos de renovación · Plantel completo</div>
-    ${P.map(p=>`
-    <div class="vl-row">
-      <div class="vl-dot" style="background:${p.rc};margin-top:4px;"></div>
-      <div style="flex:1;">
-        <div class="vl-name">${p.full} <span class="renov-badge ${rcls(p.ren)}">${p.rl}</span></div>
-        <div class="vl-reason">${p.rr}</div>
-      </div>
-    </div>`).join('')}
+    ${P.map(p=>`<div class="vl-row"><div class="vl-dot" style="background:${p.rc};margin-top:4px;"></div>
+      <div style="flex:1;"><div class="vl-name">${p.full} <span class="renov-badge ${rcls(p.ren)}">${p.rl}</span></div>
+      <div class="vl-reason">${p.rr}</div></div></div>`).join('')}
     <div class="exec-box">
       <div class="exec-title">Resumen ejecutivo</div>
-      <div class="exec-text">Núcleo irrenunciable: <strong>Stehli + Ibarra + Grytsak + Marini</strong> (los cuatro pilares del sistema). <strong>Roca</strong> merece ascender al cinco inicial o a rotación de 24+ min en playoffs. <strong>Roveres</strong> aporta con rol definido. <strong>Tarnowyk y Conti</strong> requieren evaluación honesta antes de renovar. <strong>Fornes</strong>, prioridad baja.</div>
+      <div class="exec-text">Núcleo irrenunciable: <strong>Stehli + Ibarra + Grytsak + Marini</strong> (los cuatro pilares del sistema). <strong>Roca</strong> merece ascender a rotación de 24+ min en playoffs. <strong>Roveres</strong> aporta con rol definido. <strong>Tarnowyk y Conti</strong> requieren evaluación honesta. <strong>Nesman y Fornes</strong>, prioridad baja — valor de roster.</div>
     </div>
   </div>`;
 
-  // PTS Chart
   const c1=document.getElementById('c1');
   if(c1){
     const ch=new Chart(c1,{type:'bar',data:{labels:names,datasets:[
@@ -626,30 +823,23 @@ function renderSummary(){
     ]},options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},tooltip:{backgroundColor:'#1e2230',titleColor:'#9a9890',bodyColor:'#f0eee8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,
         callbacks:{label:c=>c.datasetIndex===1?'MIN: '+(c.raw*4).toFixed(1):'PTS: '+c.raw}}},
-      scales:{x:{ticks:{color:'#5a5856',font:{size:11,family:"'DM Mono',monospace"}},grid:{display:false}},
-        y:{min:0,max:16,ticks:{color:'#5a5856',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}}
+      scales:{x:{ticks:{color:'#5a5856',font:{size:11}},grid:{display:false}},y:{min:0,max:16,ticks:{color:'#5a5856',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}}
     }});
     charts.push(ch);
   }
-
-  // Scatter
   const c2=document.getElementById('c2');
   if(c2){
     const ch=new Chart(c2,{type:'scatter',data:{datasets:P.map((p,i)=>({
       label:p.name,data:[{x:p.efg,y:p.ppp}],
-      backgroundColor:COLORS[i]+'cc',pointRadius:Math.max(7,p.plays*0.6),borderColor:COLORS[i],borderWidth:1.5
+      backgroundColor:COLORS[i]+'cc',pointRadius:Math.max(6,p.plays*0.55),borderColor:COLORS[i],borderWidth:1.5
     }))},options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},tooltip:{backgroundColor:'#1e2230',titleColor:'#9a9890',bodyColor:'#f0eee8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,
         callbacks:{label:c=>`${c.dataset.label}: eFG% ${c.parsed.x.toFixed(1)}% | PPP ${c.parsed.y.toFixed(2)}`}}},
-      scales:{
-        x:{title:{display:true,text:'eFG%',color:'#5a5856',font:{size:9}},min:40,max:65,ticks:{color:'#5a5856',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.05)'}},
-        y:{title:{display:true,text:'PPP',color:'#5a5856',font:{size:9}},min:0.70,max:1.20,ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}}
-      }
+      scales:{x:{title:{display:true,text:'eFG%',color:'#5a5856',font:{size:9}},min:35,max:65,ticks:{color:'#5a5856',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.05)'}},
+        y:{title:{display:true,text:'PPP',color:'#5a5856',font:{size:9}},min:0.55,max:1.20,ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}}}
     }});
     charts.push(ch);
   }
-
-  // PLAYS vs VAL
   const c3=document.getElementById('c3');
   if(c3){
     const ch=new Chart(c3,{type:'bar',data:{labels:names,datasets:[
@@ -657,8 +847,7 @@ function renderSummary(){
       {label:'PLAYS',data:P.map(p=>p.plays),backgroundColor:COLORS.map(c=>c+'22'),borderColor:COLORS.map(c=>c+'55'),borderWidth:1,borderRadius:4}
     ]},options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},tooltip:{backgroundColor:'#1e2230',titleColor:'#9a9890',bodyColor:'#f0eee8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1}},
-      scales:{x:{ticks:{color:'#5a5856',font:{size:11}},grid:{display:false}},
-        y:{min:0,max:18,ticks:{color:'#5a5856',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}}
+      scales:{x:{ticks:{color:'#5a5856',font:{size:11}},grid:{display:false}},y:{min:0,max:18,ticks:{color:'#5a5856',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}}
     }});
     charts.push(ch);
   }
