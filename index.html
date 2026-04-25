@@ -384,216 +384,461 @@ function efgClr(v){return v>=52?'var(--green)':v>=47?'var(--accent)':'var(--oran
 // TEAM PAGE
 // ============================================================
 function renderTeam(){
+  // Block-by-block real data from chronology (4-match blocks)
+  // B1: P1-4 (Nov 4,16,19,24), B2: P5-8 (Nov 28, Dec 3,4,6)
+  // B3: P9-12 (Dec 11,14,16, Jan 8), B4: P13-16 (Jan 10,13,16,18)
+  // B5: P17-20 (Jan 21,25,29,31), B6: P21-24 (Feb 6,8,11,14)
+  // B7: P25-28 (Feb 22,24,28, Mar 5), B8: P29-32 (Mar 7,13,25,27)
+  const BL = {
+    labels:['B1\n1-4','B2\n5-8','B3\n9-12','B4\n13-16','B5\n17-20','B6\n21-24','B7\n25-28','B8\n29-32'],
+    record:['2-2','1-3','3-1','3-1','3-1','2-2','2-2','1-3'],
+    recColor:['var(--text2)','var(--orange)','var(--green)','var(--green)','var(--green)','var(--text2)','var(--text2)','var(--orange)'],
+    pf:   [330,313,350,324,329,361,351,341],
+    pc:   [330,328,323,321,330,325,349,396],
+    // PPP ofensivo por bloque (calculado de data cronologica)
+    ppp:  [0.91,0.77,0.97,0.90,0.90,1.01,0.96,0.79],
+    pppD: [0.96,0.90,0.89,0.98,0.94,0.87,0.99,1.09],
+    efg:  [49.8,39.1,51.2,51.7,51.4,56.8,53.5,41.7],
+    ro:   [32.3,30.0,28.7,33.7,30.6,31.4,35.7,21.4],
+    pt3:  [38.8,31.8,36.0,35.7,35.6,42.1,39.8,38.6],
+    t2pct:[49.0,38.5,51.0,54.0,52.5,58.5,53.0,40.0],
+    t3pct:[30.5,28.0,31.5,30.5,30.0,38.0,33.5,28.0],
+    ppOpp:[13.2,13.4,18.2,16.6,14.7,16.5,16.5,14.3],
+    pace: [77.7,77.8,77.6,79.4,73.9,76.0,72.6,77.0],
+    plays:[93.5,89.5,93.5,93.5,84.5,88.5,90.8,88.8],
+    t2c:  [15.5,13.0,17.0,17.5,17.5,18.0,16.5,13.5],
+    t2i:  [31.8,33.8,33.3,32.3,33.3,30.8,31.0,33.8],
+    t3c:  [11.3,7.3,11.5,10.0,9.8,13.5,12.3,9.0],
+    t3i:  [37.0,26.0,36.5,32.8,32.5,35.5,36.8,32.0],
+    t1c:  [13.5,12.0,13.3,14.5,12.5,11.8,13.5,14.8],
+    t1i:  [22.3,21.8,20.0,21.5,19.3,16.3,20.5,22.8],
+    t1pct:[60.0,55.0,66.5,67.5,64.8,72.4,65.9,64.9],
+  };
+
   document.getElementById('mainContent').innerHTML=`
-  <!-- STANDING -->
+  <!-- HEADER BAR -->
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border);">
+    <div>
+      <div style="font-family:var(--head);font-size:28px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:var(--text);line-height:1;">Jujuy Básquet</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:4px;">Temporada 2025-26 · Liga Nacional Argentina · Fase Regular · 32 Partidos</div>
+    </div>
+    <div style="margin-left:auto;text-align:center;background:rgba(232,200,74,0.1);border:1px solid rgba(232,200,74,0.25);border-radius:8px;padding:10px 18px;">
+      <div style="font-family:var(--head);font-size:32px;font-weight:800;color:var(--accent);line-height:1;">8°</div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:2px;">POSICIÓN FINAL</div>
+    </div>
+    <div style="text-align:center;background:rgba(74,232,122,0.08);border:1px solid rgba(74,232,122,0.2);border-radius:8px;padding:10px 14px;">
+      <div style="font-family:var(--head);font-size:24px;font-weight:800;color:var(--green);line-height:1;">17-15</div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:2px;">BALANCE GENERAL</div>
+    </div>
+  </div>
+
+  <!-- TABLA COMPLETA -->
   <div class="scard" style="margin-bottom:14px;">
-    <div class="scard-title">Posición final · Tabla de posiciones</div>
-    <div class="standing-row header">
-      <span>Pos</span><span>Equipo</span><span style="text-align:right;">G-P</span><span style="text-align:right;">PF</span><span style="text-align:right;">% V</span>
+    <div class="scard-title">Tabla de posiciones final · Liga Nacional 2025-26</div>
+    <div style="display:grid;grid-template-columns:28px 1fr 62px 52px 52px 44px 44px;gap:6px;align-items:center;padding:5px 10px;font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);margin-bottom:2px;">
+      <span>Pos</span><span>Equipo</span><span>G-P</span><span style="text-align:right;">PF</span><span style="text-align:right;">PC</span><span style="text-align:right;">PTS</span><span style="text-align:right;">%V</span>
     </div>
     ${[
-      ['1','AMANCAY (LR)','23-9','2495','71.8',false],
-      ['2','SAN ISIDRO','23-9','2661','71.8',false],
-      ['3','BARRIO PARQUE','21-11','2600','65.6',false],
-      ['4','SP. SUARDI','20-12','2701','62.5',false],
-      ['5','SANTA PAULA (G)','19-13','2701','59.3',false],
-      ['6','COMUNICACIONES','18-14','2647','56.2',false],
-      ['7','SALTA BASKET','18-14','2593','56.2',false],
-      ['8','JUJUY BÁSQUET','17-15','2599','53.1',true],
-      ['9','VILLA SAN MARTÍN','16-16','2349','50.0',false],
-      ['10','ESTUDIANTES (T)','16-16','2558','50.0',false],
-      ['11','BOCHAS (CC)','15-17','2524','46.8',false],
-      ['12','INDEPENDIENTE (SDE)','14-18','2611','43.7',false],
-    ].map(r=>`<div class="standing-row${r[5]?' highlight':''}">
-      <span style="font-family:var(--head);font-weight:700;color:${r[5]?'var(--accent)':'var(--text3)'};">${r[0]}</span>
-      <span style="color:${r[5]?'var(--text)':'var(--text2)'};">${r[1]}</span>
-      <span style="text-align:right;color:${r[5]?'var(--accent)':'var(--text3)'};">${r[2]}</span>
+      ['1','AMANCAY (LR)','23-9',2495,2398,55,71.8,false],
+      ['2','SAN ISIDRO','23-9',2661,2480,55,71.8,false],
+      ['3','BARRIO PARQUE','21-11',2600,2403,53,65.6,false],
+      ['4','SP. SUARDI','20-12',2701,2583,52,62.5,false],
+      ['5','SANTA PAULA (G)','19-13',2701,2533,51,59.3,false],
+      ['6','COMUNICACIONES','18-14',2647,2536,50,56.2,false],
+      ['7','SALTA BASKET','18-14',2593,2590,50,56.2,false],
+      ['8','JUJUY BÁSQUET','17-15',2599,2602,49,53.1,true],
+      ['9','VILLA SAN MARTÍN','16-16',2349,2285,48,50.0,false],
+      ['10','ESTUDIANTES (T)','16-16',2558,2646,48,50.0,false],
+      ['11','BOCHAS (CC)','15-17',2524,2555,47,46.8,false],
+      ['12','INDEPENDIENTE (SDE)','14-18',2611,2660,46,43.7,false],
+      ['13','RIVADAVIA (MZA)','13-19',2463,2579,45,40.6,false],
+      ['14','HINDÚ (C)','11-21',2488,2602,43,34.3,false],
+      ['15','COLÓN (SF)','11-21',2556,2657,43,34.3,false],
+      ['16','FUSIÓN RIOJANA','11-21',2601,2782,43,34.3,false],
+      ['17','HURACÁN (LH)','6-26',2580,2836,38,18.7,false],
+    ].map(r=>`<div style="display:grid;grid-template-columns:28px 1fr 62px 52px 52px 44px 44px;gap:6px;align-items:center;padding:6px 10px;border-radius:5px;margin-bottom:2px;font-family:var(--mono);font-size:11px;${r[7]?'background:rgba(232,200,74,0.07);border:1px solid rgba(232,200,74,0.18);':''}">
+      <span style="font-family:var(--head);font-weight:700;font-size:13px;color:${r[7]?'var(--accent)':r[0]<=3?'var(--green)':'var(--text3)'};">${r[0]}</span>
+      <span style="color:${r[7]?'var(--text)':'var(--text2)'};">${r[1]}</span>
+      <span style="color:${r[7]?'var(--accent)':'var(--text3)'};">${r[2]}</span>
       <span style="text-align:right;color:var(--text3);">${r[3]}</span>
-      <span style="text-align:right;color:${r[5]?'var(--green)':'var(--text3)'};">${r[4]}%</span>
+      <span style="text-align:right;color:var(--text3);">${r[4]}</span>
+      <span style="text-align:right;font-weight:500;color:${r[7]?'var(--accent)':'var(--text2)'};">${r[5]}</span>
+      <span style="text-align:right;color:${r[7]?'var(--green)':parseFloat(r[6])>=50?'var(--text3)':'var(--red)'};">${r[6]}%</span>
     </div>`).join('')}
   </div>
 
-  <!-- KPI STRIP -->
-  <div class="team-kpi-strip">
+  <!-- KPI STRIP 8 -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;">
     <div class="team-kpi" style="border-top:3px solid var(--accent);">
-      <div class="team-kpi-val" style="color:var(--accent);">Nº 1</div>
-      <div class="team-kpi-lbl">RO% de la liga</div>
-      <div class="team-kpi-sub">30.32% rebote ofensivo<br>El único factor donde son líderes absolutos</div>
+      <div class="team-kpi-val" style="color:var(--accent);">Nº1</div>
+      <div class="team-kpi-lbl">RO% liga</div>
+      <div class="team-kpi-sub">30.32% rebote ofensivo<br>Líder absoluto, +8pp vs. promedio (22.49%)</div>
     </div>
     <div class="team-kpi" style="border-top:3px solid var(--green);">
-      <div class="team-kpi-val" style="color:var(--green);">Nº 1</div>
-      <div class="team-kpi-lbl">PLAYS de la liga</div>
-      <div class="team-kpi-sub">90.01 jugadas/partido<br>El equipo que más posesiones genera</div>
+      <div class="team-kpi-val" style="color:var(--green);">Nº1</div>
+      <div class="team-kpi-lbl">PLAYS liga</div>
+      <div class="team-kpi-sub">90.01 jugadas/partido<br>+6.7 sobre el equipo tipo (83.33)</div>
     </div>
     <div class="team-kpi" style="border-top:3px solid var(--accent2);">
-      <div class="team-kpi-val" style="color:var(--accent2);">Nº 1</div>
-      <div class="team-kpi-lbl">PP Opp% (défens.)</div>
-      <div class="team-kpi-sub">15.83% pérdidas forzadas<br>Mejor defensa generando errores rivales</div>
+      <div class="team-kpi-val" style="color:var(--accent2);">Nº1</div>
+      <div class="team-kpi-lbl">PP Opp% defens.</div>
+      <div class="team-kpi-sub">15.83% pérdidas forzadas<br>La mejor presión defensiva de la liga</div>
     </div>
     <div class="team-kpi" style="border-top:3px solid var(--red);">
-      <div class="team-kpi-val" style="color:var(--red);">Nº 17</div>
+      <div class="team-kpi-val" style="color:var(--red);">Nº17</div>
       <div class="team-kpi-lbl">eFG% ofensivo</div>
-      <div class="team-kpi-sub">49.27% — último de la liga<br>La deuda pendiente más crítica</div>
+      <div class="team-kpi-sub">49.12% — último de la liga<br>−3.3pp vs. promedio (52.36%)</div>
     </div>
   </div>
 
-  <!-- LOS 4 FACTORES QUE EXPLICAN EL 8vo PUESTO -->
+  <!-- 4 FACTORES -->
   <div class="scard" style="margin-bottom:14px;">
     <div class="scard-title">¿Por qué terminaron 8vos? Los 4 factores clave</div>
     <div class="factor-row">
       <div class="factor-icon">🏀</div>
       <div>
         <div class="factor-title">Dominio absoluto en rebote ofensivo <span class="rank-badge rank-1">RANK 1</span></div>
-        <div class="factor-body">Con un RO% de 30.32%, fueron los mejores de la liga capturando segundas oportunidades. Mientras la liga promedia 22.5%, Jujuy superó ese valor en casi 8 puntos porcentuales. Grytsak (3.81 RO por partido) y Stehli (1.50 RO) fueron los motores de este sistema. Esta métrica compensó directamente su baja eficiencia de tiro: cuando no convierten en el primer intento, buscan la segunda oportunidad.</div>
+        <div class="factor-body">30.32% de RO% (liga: 22.49%). En términos concretos: 12.06 rebotes ofensivos por partido, el doble del promedio de la liga (8.0). El equipo convertía su baja eficiencia en segunda oportunidad sistemática. Grytsak lideró con 3.81 RO/pj. El pico fue en B4 (33.7%) y B7 (35.7%), los momentos donde el sistema funcionó de manera más colectiva.</div>
       </div>
     </div>
     <div class="factor-row">
       <div class="factor-icon">⚡</div>
       <div>
         <div class="factor-title">Mayor volumen de posesiones de la liga <span class="rank-badge rank-1">RANK 1</span></div>
-        <div class="factor-body">90.01 PLAYS por partido vs. 83.33 del equipo tipo de la liga. Al generar más posesiones que cualquier otro equipo, logran que su eficiencia baja (0.90 PPP, 17° de la liga) tenga menos impacto relativo: si un equipo genera 15 posesiones extra por partido a 0.90 PPP, eso equivale a 13.5 puntos adicionales. El volumen es su principal ecualizador.</div>
+        <div class="factor-body">90.01 PLAYS/partido vs. 83.33 del equipo tipo. Con PPP de 0.90 (el peor de la liga), cada posesión extra vale menos, pero la cantidad compensa: las 6.7 posesiones adicionales por partido generan ~6 puntos extra por partido. Sin ese volumen, el déficit de eficiencia los hubiera dejado fuera del top 8.</div>
       </div>
     </div>
     <div class="factor-row">
       <div class="factor-icon">🛡️</div>
       <div>
         <div class="factor-title">Líder en pérdidas forzadas al rival <span class="rank-badge rank-1">RANK 1</span></div>
-        <div class="factor-body">15.83% de las posesiones rivales terminaron en pérdida (vs. 13.70% del equipo tipo). Esta presión defensiva tiene dos efectos: acorta las posesiones rivales y genera transiciones rápidas donde el ritmo de Jujuy se activa. PP% propias del 12.71% (4° de la liga), lo que significa que cuidan bien el balón pese a jugar tan rápido.</div>
+        <div class="factor-body">15.83% PP Opp% (liga: 13.70%). Al mismo tiempo cuidaron el balón propio: 12.71% PP% (4° de la liga). Esta combinación es letal: generan caos defensivo en el rival mientras mantienen sus propias posesiones. El pico fue en B3 (18.2% PP Opp%), bloque donde ganaron 3 de 4 partidos.</div>
       </div>
     </div>
     <div class="factor-row">
       <div class="factor-icon">🎯</div>
       <div>
-        <div class="factor-title">2° equipo con mayor frecuencia de triple <span class="rank-badge rank-top">RANK 2</span></div>
-        <div class="factor-body">38.40% de sus jugadas terminan en intento de triple. Aunque su conversión es apenas promedio (32.19%), el volumen de intentos (34.56 por partido, el mayor de la liga) les permite anotar 11.13 triples por partido. La dependencia del perímetro tiene un costo: cuando los triples no caen, la ofensiva se estanca.</div>
+        <div class="factor-title">2° mayor frecuencia de triple de la liga <span class="rank-badge rank-top">RANK 2</span></div>
+        <div class="factor-body">38.40% de jugadas terminan en triple (34.56 intentos/partido, Nº1 de la liga). Con conversión del 32.19% (Rank 11) generan 11.13 triples convertidos/partido. No es el arma más eficiente (PPP3 de 0.97) pero contribuye al ritmo alto y compensa parcialmente la debilidad en T2. El pico fue en B6 (42.1% frecuencia), el mejor bloque ofensivo del año.</div>
       </div>
     </div>
   </div>
 
-  <!-- CRONOLOGÍA POR BLOQUES -->
-  <div class="scard" style="margin-bottom:14px;">
-    <div class="scard-title">Evolución por bloques de 4 partidos · Record + métricas clave</div>
-    <div class="cycle-grid">
-      <div class="cycle-card asc">
-        <div class="cycle-head">🏀 B1–B2: Adaptación y Explosión <span class="rank-badge rank-top" style="font-size:9px;">4-4</span></div>
-        <div class="cycle-rec" style="color:var(--green);">Partidos 1–8 · Balance 4-4</div>
-        <div class="cycle-body">El equipo busca su identidad. RO% todavía inconsistente. Mayor pérdida propia del ciclo (14.5%). La victoria ante Independiente SDE (V) fue el primer indicio de lo que vendría. B2 muestra el ritmo más alto (PACE 79.5): el equipo comienza a correr la cancha de manera sistemática.</div>
-      </div>
-      <div class="cycle-card mes">
-        <div class="cycle-head">🔥 B3–B4: Pico de Identidad <span class="rank-badge rank-top" style="font-size:9px;">3-5</span></div>
-        <div class="cycle-rec" style="color:var(--accent);">Partidos 9–16 · Balance 3-5</div>
-        <div class="cycle-body">B4 marca el pico de RO% (33.5%). Ciclo de definición táctica con victorias clave ante Hindú C (90-74) y Comunicaciones (68-63). El sistema defensivo de pérdidas forzadas llega a su máximo en B3 (18.2% PP Opp%). Bloque de afirmación de la identidad colectiva.</div>
-      </div>
-      <div class="cycle-card sta">
-        <div class="cycle-head">🎯 B5–B6: Mejora de eficiencia <span class="rank-badge rank-mid" style="font-size:9px;">5-3</span></div>
-        <div class="cycle-rec" style="color:var(--accent2);">Partidos 17–24 · Balance 5-3</div>
-        <div class="cycle-body">Mejor tramo de la temporada en victorias (5-3). B6 marca el pico triplero: 42.1% de frecuencia desde 3, con 3 victorias seguidas de local. La localía se convierte en fortaleza. RO% cae al 24.8% en B5, compensado por mayor eficiencia anotadora en B6.</div>
-      </div>
-      <div class="cycle-card dec">
-        <div class="cycle-head">🐢 B7–B8: Fatiga y Caída <span class="rank-badge rank-bot" style="font-size:9px;">3-5</span></div>
-        <div class="cycle-rec" style="color:var(--red);">Partidos 25–32 · Balance 3-5</div>
-        <div class="cycle-body">PACE cae al mínimo de temporada (73.0). El equipo muestra signos de desgaste físico. Derrotas ante San Isidro y Comunicaciones en la recta final limitan las aspiraciones. Las defensas contrarias ya conocen el sistema y ajustan sobre los triplistas.</div>
-      </div>
-    </div>
-    <div style="position:relative;height:200px;"><canvas id="teamChart" role="img" aria-label="Evolución del equipo por bloques"></canvas></div>
-    <div style="display:flex;gap:16px;margin-top:10px;font-size:10px;color:var(--text3);font-family:var(--mono);">
-      <span><span style="display:inline-block;width:12px;height:2px;background:#e8c84a;vertical-align:middle;margin-right:3px;"></span>PPP (×10)</span>
-      <span><span style="display:inline-block;width:12px;height:2px;border-top:2px dashed #e84a7a;vertical-align:middle;margin-right:3px;background:none;"></span>RO%</span>
-      <span><span style="display:inline-block;width:8px;height:8px;background:rgba(74,184,232,0.3);border:1px solid #4ab8e8;vertical-align:middle;margin-right:3px;border-radius:2px;"></span>PT3% (frecuencia)</span>
-    </div>
-  </div>
-
-  <!-- LOCALÍA VS VISITA -->
+  <!-- COMPARACION LIGA -->
   <div class="grid2" style="margin-bottom:14px;">
     <div class="scard">
-      <div class="scard-title">Localía — Jujuy como local</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        <div style="background:var(--surface2);border-radius:6px;padding:10px;">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:4px;">RECORD LOCAL</div>
-          <div style="font-family:var(--head);font-size:24px;font-weight:800;color:var(--green);">11-5</div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">68.75% de victorias</div>
-        </div>
-        <div style="background:var(--surface2);border-radius:6px;padding:10px;">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:4px;">RECORD VISITANTE</div>
-          <div style="font-family:var(--head);font-size:24px;font-weight:800;color:var(--orange);">6-10</div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">37.5% de victorias</div>
-        </div>
-      </div>
-      <div style="margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.6;">La localía fue determinante: sin el dominio de local (11-5), el equipo no habría alcanzado el 8vo puesto. La diferencia de rendimiento entre local y visitante refleja la dependencia del ritmo propio y del apoyo del público para sostener el juego de alta intensidad.</div>
-    </div>
-    <div class="scard">
-      <div class="scard-title">Perfil ofensivo: ligero vs. liga promedio</div>
+      <div class="scard-title">Jujuy vs. liga promedio · Métricas clave</div>
       <div class="pos-row"><span class="pos-lbl">RO%</span>${pbar(100,'var(--accent)')}<span class="pos-val" style="color:var(--accent);">30.3%</span><span class="rank-badge rank-1" style="font-size:8px;">R1</span></div>
       <div class="pos-row"><span class="pos-lbl">PLAYS</span>${pbar(95,'var(--green)')}<span class="pos-val" style="color:var(--green);">90.0</span><span class="rank-badge rank-1" style="font-size:8px;">R1</span></div>
       <div class="pos-row"><span class="pos-lbl">PP Opp%</span>${pbar(92,'var(--accent2)')}<span class="pos-val" style="color:var(--accent2);">15.8%</span><span class="rank-badge rank-1" style="font-size:8px;">R1</span></div>
+      <div class="pos-row"><span class="pos-lbl">PP%</span>${pbar(75,'var(--green)')}<span class="pos-val" style="color:var(--green);">12.7%</span><span class="rank-badge rank-top" style="font-size:8px;">R4</span></div>
       <div class="pos-row"><span class="pos-lbl">PT3%</span>${pbar(85,'var(--purple)')}<span class="pos-val" style="color:var(--purple);">38.4%</span><span class="rank-badge rank-top" style="font-size:8px;">R2</span></div>
-      <div class="pos-row"><span class="pos-lbl">eFG%</span>${pbar(15,'var(--red)')}<span class="pos-val" style="color:var(--red);">49.3%</span><span class="rank-badge rank-bot" style="font-size:8px;">R17</span></div>
-      <div class="pos-row"><span class="pos-lbl">PPP</span>${pbar(12,'var(--red)')}<span class="pos-val" style="color:var(--red);">0.90</span><span class="rank-badge rank-bot" style="font-size:8px;">R17</span></div>
+      <div class="pos-row"><span class="pos-lbl">T3I/p</span>${pbar(90,'var(--purple)')}<span class="pos-val" style="color:var(--purple);">34.6</span><span class="rank-badge rank-1" style="font-size:8px;">R1</span></div>
+      <div class="pos-row"><span class="pos-lbl">eFG%</span>${pbar(12,'var(--red)')}<span class="pos-val" style="color:var(--red);">49.1%</span><span class="rank-badge rank-bot" style="font-size:8px;">R17</span></div>
+      <div class="pos-row"><span class="pos-lbl">PPP</span>${pbar(8,'var(--red)')}<span class="pos-val" style="color:var(--red);">0.90</span><span class="rank-badge rank-bot" style="font-size:8px;">R17</span></div>
+      <div class="pos-row"><span class="pos-lbl">T2%</span>${pbar(10,'var(--red)')}<span class="pos-val" style="color:var(--red);">49.9%</span><span class="rank-badge rank-bot" style="font-size:8px;">R17</span></div>
+      <div class="pos-row"><span class="pos-lbl">T1%</span>${pbar(12,'var(--red)')}<span class="pos-val" style="color:var(--red);">62.9%</span><span class="rank-badge rank-bot" style="font-size:8px;">R17</span></div>
+    </div>
+    <div class="scard">
+      <div class="scard-title">Distribución de lanzamientos · Jujuy vs. liga</div>
+      <div style="position:relative;height:210px;"><canvas id="distChart" role="img" aria-label="Distribución de lanzamientos comparada"></canvas></div>
+      <div style="display:flex;gap:14px;margin-top:8px;font-size:9px;color:var(--text3);font-family:var(--mono);">
+        <span><span style="display:inline-block;width:8px;height:8px;background:#4ab8e8;border-radius:2px;vertical-align:middle;margin-right:3px;"></span>Jujuy</span>
+        <span><span style="display:inline-block;width:8px;height:8px;background:rgba(154,152,144,0.4);border-radius:2px;vertical-align:middle;margin-right:3px;"></span>Liga promedio</span>
+      </div>
     </div>
   </div>
 
-  <!-- OPTIMIZACIÓN REAL -->
+  <!-- EFECTIVIDAD DE TIROS -->
+  <div class="scard" style="margin-bottom:14px;">
+    <div class="scard-title">Efectividad de tiro · Convertidos vs. errados por zona · Temporada completa</div>
+    <div class="grid2" style="margin-bottom:0;">
+      <div>
+        <div style="font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;">Jujuy Básquet</div>
+        <div style="position:relative;height:180px;"><canvas id="shotChart" role="img" aria-label="Tiros convertidos y errados Jujuy"></canvas></div>
+      </div>
+      <div>
+        <div style="font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;">Liga promedio (equipo tipo)</div>
+        <div style="position:relative;height:180px;"><canvas id="shotLeagueChart" role="img" aria-label="Tiros convertidos y errados liga"></canvas></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;margin-top:10px;font-size:9px;color:var(--text3);font-family:var(--mono);">
+      <span><span style="display:inline-block;width:8px;height:8px;background:#4ab8e8;border-radius:2px;vertical-align:middle;margin-right:3px;"></span>Convertidos</span>
+      <span><span style="display:inline-block;width:8px;height:8px;background:rgba(74,184,232,0.2);border:1px solid #4ab8e8;border-radius:2px;vertical-align:middle;margin-right:3px;"></span>Errados</span>
+    </div>
+  </div>
+
+  <!-- REBOTES DETALLE -->
+  <div class="scard" style="margin-bottom:14px;">
+    <div class="scard-title">Rebotes · Jujuy vs. liga · RD · RO · RT</div>
+    <div style="position:relative;height:220px;"><canvas id="rebChart" role="img" aria-label="Comparación de rebotes"></canvas></div>
+    <div style="display:flex;gap:16px;margin-top:8px;font-size:9px;color:var(--text3);font-family:var(--mono);">
+      <span><span style="display:inline-block;width:8px;height:8px;background:#4ae87a;border-radius:2px;vertical-align:middle;margin-right:3px;"></span>RO Jujuy (RANK 1)</span>
+      <span><span style="display:inline-block;width:8px;height:8px;background:#e87a4a;border-radius:2px;vertical-align:middle;margin-right:3px;"></span>RD Jujuy (RANK 15)</span>
+      <span><span style="display:inline-block;width:8px;height:8px;background:rgba(154,152,144,0.5);border-radius:2px;vertical-align:middle;margin-right:3px;"></span>Promedio liga</span>
+    </div>
+  </div>
+
+  <!-- BLOQUES CRONOLOGÍA -->
+  <div class="scard" style="margin-bottom:14px;">
+    <div class="scard-title">Evolución por bloques de 4 partidos · 2025-26</div>
+    <div class="cycle-grid" style="margin-bottom:14px;">
+      <div class="cycle-card asc">
+        <div class="cycle-head">📈 B1–B2: Adaptación y ritmo <span class="rank-badge rank-mid" style="font-size:9px;">2-2 / 1-3</span></div>
+        <div class="cycle-rec" style="color:var(--text2);">Partidos 1–8 · Balance acumulado 3-5</div>
+        <div class="cycle-body">PPP bajo (0.91 / 0.77). RO% sólido (32.3% / 30%). Inicio difícil con derrota ante Barrio Parque (54-75) en B2. La victoria ante Independiente SDE de visitante (103-99) fue el primer destello del sistema. El equipo todavía ajustaba la toma de triples (31.8% frecuencia B2).</div>
+      </div>
+      <div class="cycle-card mes">
+        <div class="cycle-head">🔥 B3–B4: Pico ofensivo <span class="rank-badge rank-top" style="font-size:9px;">3-1 / 3-1</span></div>
+        <div class="cycle-rec" style="color:var(--green);">Partidos 9–16 · Balance acumulado 9-7</div>
+        <div class="cycle-body">Mejor rendimiento ofensivo: PPP 0.97 (B3) y 0.90 (B4). RO% récord en B4 (33.7%). PP Opp% en pico (18.2% B3). Victorias clave: Colón SF de local (96-83), Amancay de visita (75-69), Hindú C de local (90-74), Comunicaciones de local (68-63). La identidad colectiva se consolida.</div>
+      </div>
+      <div class="cycle-card sta">
+        <div class="cycle-head">🎯 B5–B6: Mejor tramo del año <span class="rank-badge rank-top" style="font-size:9px;">3-1 / 2-2</span></div>
+        <div class="cycle-rec" style="color:var(--accent2);">Partidos 17–24 · Balance acumulado 14-10</div>
+        <div class="cycle-body">B5: 3 victorias de local (Fusión, Bochas CC, Amancay). B6: pico de eFG% (56.8%) y triplero (42.1%). Victoria visitante ante Huracán LH (94-88) en B6. La eFG% mejora notablemente respecto al promedio de temporada. El equipo llega a las 14 victorias con proyección de clasificación cómoda.</div>
+      </div>
+      <div class="cycle-card dec">
+        <div class="cycle-head">🐢 B7–B8: Caída final <span class="rank-badge rank-bot" style="font-size:9px;">2-2 / 1-3</span></div>
+        <div class="cycle-rec" style="color:var(--red);">Partidos 25–32 · Balance final 17-15</div>
+        <div class="cycle-body">PACE cae (72.6 en B7, 77.0 en B8). eFG% desploma en B8 (41.7%). Derrotas ante Comunicaciones (V), San Isidro (L) y Salta Basket (L). RO% récord en B7 (35.7%) no alcanza para compensar el colapso ofensivo. Los rivales ajustan defensas sobre el sistema triplero de Jujuy.</div>
+      </div>
+    </div>
+    <div style="position:relative;height:210px;"><canvas id="blockChart" role="img" aria-label="Métricas por bloque"></canvas></div>
+    <div style="display:grid;grid-template-columns:repeat(8,1fr);margin-top:5px;">
+      ${['B1\n1-4','B2\n5-8','B3\n9-12','B4\n13-16','B5\n17-20','B6\n21-24','B7\n25-28','B8\n29-32'].map(b=>`<div style="text-align:center;font-size:8px;font-family:var(--mono);color:var(--text3);white-space:pre;">${b}</div>`).join('')}
+    </div>
+    <div style="display:flex;gap:14px;margin-top:6px;font-size:9px;color:var(--text3);font-family:var(--mono);">
+      <span><span style="display:inline-block;width:12px;height:2px;background:#e8c84a;vertical-align:middle;margin-right:3px;"></span>eFG%</span>
+      <span><span style="display:inline-block;width:12px;height:2px;border-top:2px dashed #4ae87a;vertical-align:middle;margin-right:3px;background:none;"></span>RO%</span>
+      <span><span style="display:inline-block;width:8px;height:8px;background:rgba(74,184,232,0.25);border:1px solid #4ab8e8;vertical-align:middle;margin-right:3px;border-radius:2px;"></span>PPP×50</span>
+    </div>
+  </div>
+
+  <!-- LOCAL VS VISITANTE -->
+  <div class="grid2" style="margin-bottom:14px;">
+    <div class="scard">
+      <div class="scard-title">Local vs. Visitante · Record y métricas</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+        <div style="background:var(--surface2);border-radius:6px;padding:10px;border-left:3px solid var(--accent2);">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:3px;">LOCAL (16 partidos)</div>
+          <div style="font-family:var(--head);font-size:24px;font-weight:800;color:var(--green);">11-5</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">68.75% · PPP 0.90 · eFG% 48.86%</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">RO% 30.79% · PP Opp% 16.39%</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:6px;padding:10px;border-left:3px solid var(--orange);">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:3px;">VISITANTE (16 partidos)</div>
+          <div style="font-family:var(--head);font-size:24px;font-weight:800;color:var(--orange);">6-10</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">37.5% · PPP 0.91 · eFG% 49.69%</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">RO% 29.53% · PP Opp% 15.27%</div>
+        </div>
+      </div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.6;">Dato revelador: la diferencia de eFG% entre local y visitante es mínima (48.86% vs 49.69%). El problema visitante no es la eficiencia sino el contexto defensivo: los rivales de local imponen más presión física (RTL% rival 28.81% visitante vs 26.37% de local). La brecha 11-5 vs 6-10 se explica más por factores de ritmo y cancha que por eficiencia pura.</div>
+    </div>
+    <div class="scard">
+      <div class="scard-title">Local vs. Visitante · Comparación gráfica</div>
+      <div style="position:relative;height:190px;"><canvas id="lvChart" role="img" aria-label="Local vs visitante métricas"></canvas></div>
+    </div>
+  </div>
+
+  <!-- PÉRDIDAS Y EFECTIVIDAD -->
+  <div class="grid2" style="margin-bottom:14px;">
+    <div class="scard">
+      <div class="scard-title">Pérdidas de balón · Propio vs. rival provocadas</div>
+      <div style="position:relative;height:170px;"><canvas id="ppChart" role="img" aria-label="Pérdidas propio vs rival"></canvas></div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:8px;line-height:1.5;">Jujuy es el 4° equipo que menos pierde (12.71%) y el Nº1 que más provoca al rival (15.83%). La diferencia positiva de +3.12pp es el mayor margen de la liga.</div>
+    </div>
+    <div class="scard">
+      <div class="scard-title">Efectividad de tiro por zona · PPP convertido</div>
+      <div style="position:relative;height:170px;"><canvas id="pppChart" role="img" aria-label="PPP por zona de tiro"></canvas></div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:8px;line-height:1.5;">PPT2 (1.00) y PPT3 (0.97) por debajo del promedio (1.08 / 1.00). PPT1 de 0.63, el peor de la liga. Las tres zonas están bajo la media.</div>
+    </div>
+  </div>
+
+  <!-- OPTIMIZACIÓN -->
   <div class="scard">
-    <div class="scard-title">Condiciones de optimización — Desde lo real, no lo ideal</div>
+    <div class="scard-title">Optimización desde lo real · Condiciones alcanzables</div>
     <div class="optim-row">
       <div class="optim-dot" style="background:var(--accent);"></div>
       <div>
-        <div class="optim-title">Mejorar eFG% de 49.3% a 52-53% <span class="rank-badge rank-top" style="font-size:8px;">PRIORITARIO</span></div>
-        <div class="optim-body">Es el cambio más realista con mayor impacto. La diferencia entre el equipo tipo (52.45%) y Jujuy (49.27%) equivale a ~4 puntos por partido. No requiere cambiar la filosofía: solo mejorar el %T2 (actualmente 17°, 49.95%) a través de selección de tiro más inteligente. Ibarra (63.7% T2%) debe recibir más posesiones de media distancia.</div>
+        <div class="optim-title">Mejorar T2% de 49.9% a 53-54% <span class="rank-badge rank-top" style="font-size:8px;">PRIORITARIO</span></div>
+        <div class="optim-body">Es el cambio más realista con mayor impacto. Jujuy tiene el peor T2% de la liga (49.95%, Rank 17) cuando el promedio es 54.25%. Cada 1pp de mejora equivale a +0.6 puntos por partido. Ibarra (63.7% T2%) y Roveres (51.9% T2%) demuestran que hay capacidad instalada: el sistema necesita darles más posesiones interiores. No es un cambio de identidad, sino de distribución del balón.</div>
+      </div>
+    </div>
+    <div class="optim-row">
+      <div class="optim-dot" style="background:var(--red);"></div>
+      <div>
+        <div class="optim-title">Mejorar tiro libre de 62.9% a 68-70% <span class="rank-badge rank-top" style="font-size:8px;">URGENTE</span></div>
+        <div class="optim-body">Con el peor T1% de la liga (62.93%, Rank 17), Jujuy convierte solo 13.16 de 20.91 tiros libres por partido. La liga promedia 69.58%. Cada punto mejora en T1% vale +0.2 puntos por partido. Stehli (59.5%), Grytsak (48.9%) y Nesman (45.5%) son los casos más críticos. Con trabajo específico de pretemporada se puede llegar al 68%, lo que equivale a +2 puntos/partido.</div>
       </div>
     </div>
     <div class="optim-row">
       <div class="optim-dot" style="background:var(--green);"></div>
       <div>
-        <div class="optim-title">Mantener el RO% y añadir conversión real <span class="rank-badge rank-top" style="font-size:8px;">FORTALEZA A CONSERVAR</span></div>
-        <div class="optim-body">El dominio del rebote ofensivo (Rank 1) ya está instalado como cultura. El paso siguiente es que esas segundas oportunidades terminen en tiros de mayor calidad. Actualmente 30.32% de RO con 0.90 PPP da resultado. Con 0.94 PPP daría clasificación directa a cuartos.</div>
+        <div class="optim-title">Mantener RO% y mejorar la calidad de segunda oportunidad <span class="rank-badge rank-top" style="font-size:8px;">CONSERVAR Y ESCALAR</span></div>
+        <div class="optim-body">El RO% de 30.32% (Rank 1) está instalado como cultura de equipo y no debe sacrificarse. El paso siguiente es que esos 12.06 rebotes ofensivos por partido se traduzcan en tiros de mayor calidad. Actualmente las posesiones de segunda oportunidad tienen el mismo PPP bajo (0.90) que el juego general. Con mejor selección post-rebote, el sistema se vuelve letal.</div>
       </div>
     </div>
     <div class="optim-row">
       <div class="optim-dot" style="background:var(--accent2);"></div>
       <div>
-        <div class="optim-title">Equilibrar local/visitante: de 11-5 y 6-10 a 13-3 / 8-8 <span class="rank-badge rank-mid" style="font-size:8px;">ALCANZABLE</span></div>
-        <div class="optim-body">La brecha de rendimiento entre local (68.75%) y visitante (37.5%) es excesiva. El sistema de ritmo alto funciona bien de local donde el equipo controla el juego. De visitante necesita mayor adaptación táctica: bajar el ritmo cuando el rival lo impone y mejorar la eficiencia perimetral visitante (los triplistas caen ~5pp fuera de casa).</div>
-      </div>
-    </div>
-    <div class="optim-row">
-      <div class="optim-dot" style="background:var(--orange);"></div>
-      <div>
-        <div class="optim-title">Gestionar la carga física en bloques 7-8 <span class="rank-badge rank-mid" style="font-size:8px;">GESTIÓN INTERNA</span></div>
-        <div class="optim-body">La caída de rendimiento en B7-B8 (de 5-3 a 3-5) sugiere desgaste acumulado. Stehli promedia 31+ MIN, Grytsak 26.5 MIN con alto desgaste físico por el rebote. Implementar rotaciones más amplias de 8-9 jugadores activos en el tramo final permitiría llegar a playoffs con mayor frescura física.</div>
+        <div class="optim-title">Reducir la brecha local/visitante: gestión táctica de ritmo <span class="rank-badge rank-mid" style="font-size:8px;">TÁCTICA</span></div>
+        <div class="optim-body">La brecha 11-5 local vs 6-10 visitante es excesiva. La eficiencia visitante no es el problema (49.69% eFG% vs 48.86% de local, diferencia mínima). El problema es que de visitante el rival ajusta mejor el ritmo y Jujuy no tiene Plan B. Necesita desarrollar un juego interior de visitante que permita desacelerar sin perder efectividad cuando el rival niega el triple.</div>
       </div>
     </div>
     <div class="optim-row" style="border-bottom:none;">
-      <div class="optim-dot" style="background:var(--purple);"></div>
+      <div class="optim-dot" style="background:var(--orange);"></div>
       <div>
-        <div class="optim-title">Reducir la dependencia del triple de visitante <span class="rank-badge rank-mid" style="font-size:8px;">TÁCTICA</span></div>
-        <div class="optim-body">38.4% de frecuencia de triple (2° de la liga) con 32.19% de conversión es sostenible de local. De visitante la conversión cae y el equipo no tiene Plan B. Desarrollar el juego de dobles de Ibarra (63.7% T2%) y Roveres (PPP 1.04 en ataque al aro) como opciones primarias en partidos visitantes reduce la volatilidad ofensiva.</div>
+        <div class="optim-title">Gestionar carga física en tramo final (B7-B8) <span class="rank-badge rank-mid" style="font-size:8px;">GESTIÓN INTERNA</span></div>
+        <div class="optim-body">El colapso en B8 (eFG% 41.7%, PPP 0.79, balance 1-3) sugiere desgaste físico acumulado. Stehli promedió 31+ MIN toda la temporada, Grytsak 26.5 MIN con alta carga de rebote. Implementar rotaciones más amplias (8-9 jugadores activos en el tramo 25-32) y reducir a Stehli a 28 MIN en partidos de bajo riesgo permitiría llegar a playoffs con mayor frescura.</div>
       </div>
     </div>
   </div>`;
 
-  // Team chronology chart
-  const ctx=document.getElementById('teamChart');
-  if(!ctx) return;
-  const ppp=[8.7,8.8,9.4,9.6,8.6,9.9,9.2,8.3].map(v=>+(v).toFixed(1));
-  const ro=[28.5,29.2,30.8,33.5,24.8,28.2,29.5,27.8];
-  const pt3=[31.0,36.5,38.5,36.8,35.2,42.1,38.5,37.8];
-  const ch=new Chart(ctx,{
-    type:'bar',
-    data:{labels:['B1','B2','B3','B4','B5','B6','B7','B8'],datasets:[
-      {type:'bar',label:'PT3%',data:pt3,backgroundColor:'rgba(74,184,232,0.25)',borderColor:'#4ab8e8',borderWidth:1,borderRadius:3,yAxisID:'y'},
-      {type:'line',label:'PPP×10',data:ppp,borderColor:'#e8c84a',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#e8c84a',tension:0.3,yAxisID:'y'},
-      {type:'line',label:'RO%',data:ro,borderColor:'#e84a7a',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#e84a7a',tension:0.3,yAxisID:'y'}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{backgroundColor:'#1e2230',titleColor:'#9a9890',bodyColor:'#f0eee8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1}},
-      scales:{
-        x:{ticks:{color:'#5a5856',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},
-        y:{min:0,max:45,ticks:{color:'#5a5856',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}
-      }
+  // ---- CHARTS ----
+  const chartOpts = (yMin,yMax,lg=false) => ({
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:lg,labels:{color:'#5a5856',font:{size:9,family:"'DM Mono',monospace"},boxWidth:8}},
+      tooltip:{backgroundColor:'#1e2230',titleColor:'#9a9890',bodyColor:'#f0eee8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1}},
+    scales:{
+      x:{ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
+      y:{min:yMin,max:yMax,ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}}
     }
   });
-  charts.push(ch);
+
+  // Distribución lanzamientos (grouped bar)
+  const distCtx = document.getElementById('distChart');
+  if(distCtx){
+    const ch = new Chart(distCtx,{type:'bar',data:{
+      labels:['T2 intentos','T3 intentos','T1 intentos','T2 convert.','T3 convert.','T1 convert.'],
+      datasets:[
+        {label:'Jujuy',data:[34.72,34.56,20.91,17.34,11.13,13.16],backgroundColor:'rgba(74,184,232,0.7)',borderColor:'#4ab8e8',borderWidth:1,borderRadius:3},
+        {label:'Liga',data:[38.00,25.75,19.69,20.31,8.88,13.44],backgroundColor:'rgba(154,152,144,0.3)',borderColor:'rgba(154,152,144,0.5)',borderWidth:1,borderRadius:3}
+      ]},
+      options:chartOpts(0,42,true)
+    });
+    charts.push(ch);
+  }
+
+  // Tiros Jujuy convertidos vs errados
+  const shotCtx = document.getElementById('shotChart');
+  if(shotCtx){
+    const ch = new Chart(shotCtx,{type:'bar',data:{
+      labels:['T2','T3','T1'],
+      datasets:[
+        {label:'Convertidos',data:[17.34,11.13,13.16],backgroundColor:'rgba(74,184,232,0.75)',borderColor:'#4ab8e8',borderWidth:1,borderRadius:3},
+        {label:'Errados',data:[34.72-17.34,34.56-11.13,20.91-13.16],backgroundColor:'rgba(74,184,232,0.15)',borderColor:'rgba(74,184,232,0.4)',borderWidth:1,borderRadius:3}
+      ]},
+      options:{...chartOpts(0,38,true),scales:{x:{ticks:{color:'#5a5856',font:{size:10}},grid:{display:false}},y:{min:0,max:38,ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}}}}
+    });
+    charts.push(ch);
+  }
+
+  // Tiros liga convertidos vs errados
+  const shotLCtx = document.getElementById('shotLeagueChart');
+  if(shotLCtx){
+    const ch = new Chart(shotLCtx,{type:'bar',data:{
+      labels:['T2','T3','T1'],
+      datasets:[
+        {label:'Convertidos',data:[20.31,8.88,13.44],backgroundColor:'rgba(154,152,144,0.6)',borderColor:'rgba(154,152,144,0.8)',borderWidth:1,borderRadius:3},
+        {label:'Errados',data:[38.00-20.31,25.75-8.88,19.69-13.44],backgroundColor:'rgba(154,152,144,0.15)',borderColor:'rgba(154,152,144,0.3)',borderWidth:1,borderRadius:3}
+      ]},
+      options:{...chartOpts(0,38,true),scales:{x:{ticks:{color:'#5a5856',font:{size:10}},grid:{display:false}},y:{min:0,max:38,ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}}}}
+    });
+    charts.push(ch);
+  }
+
+  // Rebotes comparación
+  const rebCtx = document.getElementById('rebChart');
+  if(rebCtx){
+    const teams=['Jujuy','Liga prom.'];
+    const ch = new Chart(rebCtx,{type:'bar',data:{
+      labels:teams,
+      datasets:[
+        {label:'RO',data:[12.06,8.00],backgroundColor:['rgba(74,232,122,0.75)','rgba(154,152,144,0.3)'],borderColor:['#4ae87a','rgba(154,152,144,0.5)'],borderWidth:1,borderRadius:4},
+        {label:'RD',data:[25.91,26.91],backgroundColor:['rgba(232,122,74,0.55)','rgba(154,152,144,0.2)'],borderColor:['#e87a4a','rgba(154,152,144,0.4)'],borderWidth:1,borderRadius:4},
+        {label:'RT',data:[37.97,34.75],backgroundColor:['rgba(74,184,232,0.35)','rgba(154,152,144,0.1)'],borderColor:['rgba(74,184,232,0.7)','rgba(154,152,144,0.3)'],borderWidth:1,borderRadius:4}
+      ]},
+      options:{...chartOpts(0,44,true),scales:{x:{ticks:{color:'#5a5856',font:{size:11}},grid:{display:false}},y:{min:0,max:44,ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}}}}
+    });
+    charts.push(ch);
+  }
+
+  // Bloques cronología
+  const blkCtx = document.getElementById('blockChart');
+  if(blkCtx){
+    const ch = new Chart(blkCtx,{type:'bar',data:{
+      labels:['B1','B2','B3','B4','B5','B6','B7','B8'],
+      datasets:[
+        {type:'bar',label:'PPP×50',data:BL.ppp.map(v=>+(v*50).toFixed(1)),backgroundColor:'rgba(74,184,232,0.2)',borderColor:'#4ab8e8',borderWidth:1,borderRadius:3,yAxisID:'y'},
+        {type:'line',label:'eFG%',data:BL.efg,borderColor:'#e8c84a',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#e8c84a',tension:0.3,yAxisID:'y'},
+        {type:'line',label:'RO%',data:BL.ro,borderColor:'#4ae87a',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#4ae87a',tension:0.3,yAxisID:'y'}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{backgroundColor:'#1e2230',titleColor:'#9a9890',bodyColor:'#f0eee8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1,
+          callbacks:{label:c=>c.dataset.label==='PPP×50'?'PPP: '+(c.raw/50).toFixed(2):c.dataset.label+': '+c.raw+'%'}}},
+        scales:{x:{ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.04)'}},
+          y:{min:0,max:60,ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}}}
+      }
+    });
+    charts.push(ch);
+  }
+
+  // Local vs visitante
+  const lvCtx = document.getElementById('lvChart');
+  if(lvCtx){
+    const ch = new Chart(lvCtx,{type:'radar',data:{
+      labels:['PPP','eFG%×10','RO%×10','PP Opp%×10','T3%×10','RTL%×10'],
+      datasets:[
+        {label:'Local',data:[0.90*10,48.86/10*10,30.79/10*10,16.39/10*10,38.2/10*10,19.77/10*10].map(v=>+v.toFixed(1)),
+          borderColor:'#4ab8e8',backgroundColor:'rgba(74,184,232,0.1)',borderWidth:2,pointBackgroundColor:'#4ab8e8',pointRadius:3},
+        {label:'Visitante',data:[0.91*10,49.69/10*10,29.53/10*10,15.27/10*10,38.7/10*10,18.67/10*10].map(v=>+v.toFixed(1)),
+          borderColor:'#e87a4a',backgroundColor:'rgba(232,122,74,0.1)',borderWidth:2,pointBackgroundColor:'#e87a4a',pointRadius:3}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:true,labels:{color:'#5a5856',font:{size:9},boxWidth:8}},
+          tooltip:{backgroundColor:'#1e2230',titleColor:'#9a9890',bodyColor:'#f0eee8',borderColor:'rgba(255,255,255,0.1)',borderWidth:1}},
+        scales:{r:{angleLines:{color:'rgba(255,255,255,0.05)'},grid:{color:'rgba(255,255,255,0.06)'},
+          ticks:{color:'#5a5856',font:{size:8},backdropColor:'transparent'},
+          pointLabels:{color:'#5a5856',font:{size:9}}}}
+      }
+    });
+    charts.push(ch);
+  }
+
+  // PP% propio vs forzado
+  const ppCtx = document.getElementById('ppChart');
+  if(ppCtx){
+    const ch = new Chart(ppCtx,{type:'bar',data:{
+      labels:['PP% propias (menos=mejor)','PP Opp% (más=mejor)'],
+      datasets:[
+        {label:'Jujuy',data:[12.71,15.83],backgroundColor:['rgba(74,232,122,0.6)','rgba(232,200,74,0.6)'],borderColor:['#4ae87a','#e8c84a'],borderWidth:1,borderRadius:4},
+        {label:'Liga promedio',data:[13.58,13.70],backgroundColor:['rgba(154,152,144,0.25)','rgba(154,152,144,0.25)'],borderColor:['rgba(154,152,144,0.5)','rgba(154,152,144,0.5)'],borderWidth:1,borderRadius:4}
+      ]},
+      options:{...chartOpts(0,18,true),indexAxis:'y',
+        scales:{x:{min:0,max:18,ticks:{color:'#5a5856',font:{size:9}},grid:{color:'rgba(255,255,255,0.05)'}},
+          y:{ticks:{color:'#5a5856',font:{size:10}},grid:{display:false}}}
+      }
+    });
+    charts.push(ch);
+  }
+
+  // PPP por zona
+  const pppCtx = document.getElementById('pppChart');
+  if(pppCtx){
+    const ch = new Chart(pppCtx,{type:'bar',data:{
+      labels:['PPT2 (dobles)','PPT3 (triples)','PPT1 (libres)'],
+      datasets:[
+        {label:'Jujuy',data:[1.00,0.97,0.63],backgroundColor:['rgba(232,200,74,0.6)','rgba(74,184,232,0.6)','rgba(232,122,74,0.6)'],borderColor:['#e8c84a','#4ab8e8','#e87a4a'],borderWidth:1,borderRadius:4},
+        {label:'Liga',data:[1.08,1.00,0.70],backgroundColor:['rgba(154,152,144,0.25)','rgba(154,152,144,0.25)','rgba(154,152,144,0.25)'],borderColor:['rgba(154,152,144,0.5)','rgba(154,152,144,0.5)','rgba(154,152,144,0.5)'],borderWidth:1,borderRadius:4}
+      ]},
+      options:{...chartOpts(0,1.3,true),
+        scales:{x:{ticks:{color:'#5a5856',font:{size:9}},grid:{display:false}},
+          y:{min:0,max:1.3,ticks:{color:'#5a5856',font:{size:9},callback:v=>v.toFixed(2)},grid:{color:'rgba(255,255,255,0.05)'}}}
+      }
+    });
+    charts.push(ch);
+  }
 }
 
 // ============================================================
