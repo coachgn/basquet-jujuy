@@ -616,28 +616,177 @@ function renderTeam(){
   </div>
 
   <!-- LOCAL VS VISITANTE -->
-  <div class="grid2" style="margin-bottom:14px;">
-    <div class="scard">
-      <div class="scard-title">Local vs. Visitante · Record y métricas</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-        <div style="background:var(--surface2);border-radius:6px;padding:10px;border-left:3px solid var(--accent2);">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:3px;">LOCAL (16 partidos)</div>
-          <div style="font-family:var(--head);font-size:24px;font-weight:800;color:var(--green);">11-5</div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">68.75% · PPP 0.90 · eFG% 48.86%</div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">RO% 30.79% · PP Opp% 16.39%</div>
-        </div>
-        <div style="background:var(--surface2);border-radius:6px;padding:10px;border-left:3px solid var(--orange);">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:3px;">VISITANTE (16 partidos)</div>
-          <div style="font-family:var(--head);font-size:24px;font-weight:800;color:var(--orange);">6-10</div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">37.5% · PPP 0.91 · eFG% 49.69%</div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);">RO% 29.53% · PP Opp% 15.27%</div>
+  <div class="scard" style="margin-bottom:14px;">
+    <div class="scard-title">Local vs. Visitante · Record, métricas y análisis por resultado</div>
+
+    <!-- Resumen top -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+      <div style="background:var(--surface2);border-radius:8px;padding:14px;border-left:3px solid var(--accent2);">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em;">LOCAL · 16 partidos</div>
+        <div style="font-family:var(--head);font-size:28px;font-weight:800;color:var(--green);line-height:1;margin-bottom:4px;">9-7</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-family:var(--mono);font-size:10px;color:var(--text3);">
+          <span>PPP <b style="color:var(--text2);">0.90</b></span>
+          <span>eFG% <b style="color:var(--text2);">48.9%</b></span>
+          <span>T2% <b style="color:var(--text2);">47.8%</b></span>
+          <span>T3% <b style="color:var(--text2);">33.1%</b></span>
+          <span>T1% <b style="color:var(--text2);">64.6%</b></span>
+          <span>RTL% <b style="color:var(--text2);">19.8%</b></span>
+          <span>RO% <b style="color:var(--accent);">30.8%</b></span>
+          <span>PP Opp% <b style="color:var(--accent2);">16.4%</b></span>
+          <span>PLAYS <b style="color:var(--text2);">91.6</b></span>
+          <span>Net Rtng <b style="color:var(--red);">−3.28</b></span>
         </div>
       </div>
-      <div style="font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.6;">Dato revelador: la diferencia de eFG% entre local y visitante es mínima (48.86% vs 49.69%). El problema visitante no es la eficiencia sino el contexto defensivo: los rivales de local imponen más presión física (RTL% rival 28.81% visitante vs 26.37% de local). La brecha 11-5 vs 6-10 se explica más por factores de ritmo y cancha que por eficiencia pura.</div>
+      <div style="background:var(--surface2);border-radius:8px;padding:14px;border-left:3px solid var(--orange);">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em;">VISITANTE · 16 partidos</div>
+        <div style="font-family:var(--head);font-size:28px;font-weight:800;color:var(--orange);line-height:1;margin-bottom:4px;">8-8</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-family:var(--mono);font-size:10px;color:var(--text3);">
+          <span>PPP <b style="color:var(--text2);">0.91</b></span>
+          <span>eFG% <b style="color:var(--text2);">49.7%</b></span>
+          <span>T2% <b style="color:var(--text2);">53.2%</b></span>
+          <span>T3% <b style="color:var(--text2);">30.9%</b></span>
+          <span>T1% <b style="color:var(--text2);">61.5%</b></span>
+          <span>RTL% <b style="color:var(--text2);">18.7%</b></span>
+          <span>RO% <b style="color:var(--accent);">29.5%</b></span>
+          <span>PP Opp% <b style="color:var(--accent2);">15.3%</b></span>
+          <span>PLAYS <b style="color:var(--text2);">88.4</b></span>
+          <span>Net Rtng <b style="color:var(--red);">−9.27</b></span>
+        </div>
+      </div>
     </div>
-    <div class="scard">
-      <div class="scard-title">Local vs. Visitante · Comparación gráfica</div>
-      <div style="position:relative;height:190px;"><canvas id="lvChart" role="img" aria-label="Local vs visitante métricas"></canvas></div>
+
+    <!-- Análisis por resultado: 4 cajas -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+
+      <!-- LOCAL GANADOS (9 partidos) -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:13px;border-top:2px solid var(--green);">
+        <div style="font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">🏠 Local ganados · 9 partidos</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px;">
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">PPP</div>
+            <div style="font-size:14px;font-weight:700;color:var(--green);">0.95</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">eFG%</div>
+            <div style="font-size:14px;font-weight:700;color:var(--green);">51.1%</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">Net Rating</div>
+            <div style="font-size:14px;font-weight:700;color:var(--green);">+6.23</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">RO%</div>
+            <div style="font-size:14px;font-weight:700;color:var(--accent);">31.0%</div>
+          </div>
+        </div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);line-height:1.5;border-top:1px solid var(--border);padding-top:7px;">
+          <div style="margin-bottom:3px;"><span style="color:var(--green);">✓</span> T1% 70.1 / T2% 47.0 / T3% 36.7</div>
+          <div style="margin-bottom:3px;"><span style="color:var(--green);">✓</span> Identidad: RO% +8.1pp sobre liga · Net Rtng positivo</div>
+          <div><span style="color:var(--orange);">⚠</span> T2% 47.0% sigue siendo −7.6pp bajo la liga. La eficiencia interna es la asignatura pendiente incluso ganando.</div>
+        </div>
+      </div>
+
+      <!-- LOCAL PERDIDOS (7 partidos) -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:13px;border-top:2px solid var(--red);">
+        <div style="font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:8px;">🏠 Local perdidos · 7 partidos</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px;">
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">PPP</div>
+            <div style="font-size:14px;font-weight:700;color:var(--red);">0.83</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">eFG%</div>
+            <div style="font-size:14px;font-weight:700;color:var(--red);">45.9%</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">Net Rating</div>
+            <div style="font-size:14px;font-weight:700;color:var(--red);">−15.50</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">RO%</div>
+            <div style="font-size:14px;font-weight:700;color:var(--accent);">30.5%</div>
+          </div>
+        </div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);line-height:1.5;border-top:1px solid var(--border);padding-top:7px;">
+          <div style="margin-bottom:3px;"><span style="color:var(--red);">✗</span> T1% 57.5 (−11.4pp liga) / T3% 28.6% (−4.6pp liga)</div>
+          <div style="margin-bottom:3px;"><span style="color:var(--red);">✗</span> Rating Off −13.3 pts bajo media · Rating Def +2.2 pts sobre media</div>
+          <div><span style="color:var(--green);">✓</span> RO% 30.5%: el rebote ofensivo resiste incluso en las derrotas. Es la única métrica de identidad que sobrevive.</div>
+        </div>
+      </div>
+
+      <!-- VISITANTE GANADOS (8 partidos) -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:13px;border-top:2px solid var(--accent2);">
+        <div style="font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;">✈ Visitante ganados · 8 partidos</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px;">
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">PPP</div>
+            <div style="font-size:14px;font-weight:700;color:var(--green);">1.01</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">eFG%</div>
+            <div style="font-size:14px;font-weight:700;color:var(--green);">55.7%</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">Net Rating</div>
+            <div style="font-size:14px;font-weight:700;color:var(--green);">+4.23</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">T2%</div>
+            <div style="font-size:14px;font-weight:700;color:var(--green);">57.1%</div>
+          </div>
+        </div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);line-height:1.5;border-top:1px solid var(--border);padding-top:7px;">
+          <div style="margin-bottom:3px;"><span style="color:var(--green);">✓</span> T1% 58.9 / T2% 57.1 (+2.5pp liga) / T3% 36.2% (+3.1pp liga)</div>
+          <div style="margin-bottom:3px;"><span style="color:var(--green);">✓</span> RO% 30.9% (+8.0pp liga) · eFG% 55.7% (+2.96pp liga</div>
+          <div><span style="color:var(--orange);">⚠</span> Rating Def +0.82 pts sobre media: ganan a pesar de la defensa, no gracias a ella.</div>
+        </div>
+      </div>
+
+      <!-- VISITANTE PERDIDOS (8 partidos) -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:13px;border-top:2px solid var(--orange);">
+        <div style="font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">✈ Visitante perdidos · 8 partidos</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px;">
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">PPP</div>
+            <div style="font-size:14px;font-weight:700;color:var(--red);">0.81</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">eFG%</div>
+            <div style="font-size:14px;font-weight:700;color:var(--red);">43.7%</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">Net Rating</div>
+            <div style="font-size:14px;font-weight:700;color:var(--red);">−22.76</div>
+          </div>
+          <div style="background:var(--surface2);border-radius:4px;padding:6px 8px;font-family:var(--mono);">
+            <div style="font-size:9px;color:var(--text3);">T3%</div>
+            <div style="font-size:14px;font-weight:700;color:var(--red);">25.6%</div>
+          </div>
+        </div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);line-height:1.5;border-top:1px solid var(--border);padding-top:7px;">
+          <div style="margin-bottom:3px;"><span style="color:var(--red);">✗</span> T3% 25.6% (−7.5pp liga) · T2% 49.2% (−5.4pp liga)</div>
+          <div style="margin-bottom:3px;"><span style="color:var(--red);">✗</span> Rating Off −15.0 pts bajo media · Rating Def +7.75 pts sobre media</div>
+          <div><span style="color:var(--green);">✓</span> RO% 28.2% (+5.4pp liga): el único factor que resiste en los peores partidos.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insight clave -->
+    <div style="background:rgba(232,200,74,0.07);border:1px solid rgba(232,200,74,0.2);border-radius:7px;padding:12px 14px;">
+      <div style="font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">📌 Insight clave: el patrón de las victorias</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.65;">
+        El equipo gana cuando la <b style="color:var(--text);">eficiencia de tiro supera el 51%</b> (local: 51.1% eFG%, visitante: 55.7% eFG%). En las derrotas, el colapso no viene del rebote ofensivo —que se mantiene constante en todas las condiciones (+5 a +8pp sobre la liga— sino del triple: <b style="color:var(--text);">T3% cae de 36-37% en victorias a 25-29% en derrotas</b>. Cuando el triple no entra, el equipo no tiene Plan B interior consistente (T2% 47-49% en derrotas vs 57% en victorias visitantes). El tiro libre es el punto de fuga permanente: <b style="color:var(--red);">57-64% en todos los contextos</b>, muy por debajo del promedio liga (69.6%).
+      </div>
+    </div>
+  </div>
+
+  <!-- GRÁFICO LOCAL VS VISITANTE -->
+  <div class="scard" style="margin-bottom:14px;">
+    <div class="scard-title">Local vs. Visitante · Comparación visual por condición</div>
+    <div style="position:relative;height:210px;"><canvas id="lvChart" role="img" aria-label="Local vs visitante métricas comparadas"></canvas></div>
+    <div style="display:flex;gap:14px;margin-top:8px;font-size:9px;color:var(--text3);font-family:var(--mono);">
+      <span><span style="display:inline-block;width:8px;height:8px;background:#4ab8e8;border-radius:2px;vertical-align:middle;margin-right:3px;"></span>Local</span>
+      <span><span style="display:inline-block;width:8px;height:8px;background:#e87a4a;border-radius:2px;vertical-align:middle;margin-right:3px;"></span>Visitante</span>
     </div>
   </div>
 
