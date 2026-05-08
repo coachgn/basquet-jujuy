@@ -178,167 +178,61 @@
 // ============================================================
 // PLAYER DATA
 // ============================================================
-const P = [
-  {id:'stehli',name:'Stehli',full:'Stehli, Ramiro G.',init:'RS',ab:'#1a2a3a',ac:'#4ab8e8',
-   pj:32,min:31.03,plays:16.49,pts:13.53,ppp:0.82,usg:23.99,efg:44.60,val:12.13,
-   t2c:2.88,t2i:6.75,t2p:42.59,t3c:1.78,t3i:5.69,t3p:31.32,t1c:2.44,t1i:4.09,t1p:59.54,
-   ast:2.50,rd:3.63,ro:1.50,reb:5.13,
-   lPts:14.20,lEfg:46.1,lReb:5.4,lVal:13.8,vPts:12.85,vEfg:43.1,vReb:4.8,vVal:10.4,
-   lDesc:'Agresivo: mayor volumen de faltas recibidas y tiros libres.',vDesc:'Perimetral: depende más del triple; baja su eficiencia.',
-   bl:[[12.5,45.1,13.2],[11.2,41.8,10.5],[14.2,48.5,16.1],[13.8,44.5,14.1],[10.9,40.2,9.8],[15.8,47.9,16.5],[13.5,43.1,13.2],[14.6,46.2,15.4]],
-   pe:{pts:'ÉLITE',plays:'ÉLITE',efg:'PROM',ppp:'PROM'},pp:[92,95,50,47],
-   sc:[{lv:'Alto',lc:'green',bc:'c-green',lb:'Impacto colectivo',mt:'16.5 PLAYS · 31 MIN',dt:'Máximo volumen del plantel en decisiones y minutos. Absorbe la presión cuando el sistema colectivo se traba.'},
-       {lv:'Medio',lc:'orange',bc:'c-orange',lb:'Eficiencia individual',mt:'eFG% 44.6% · PPP 0.82',dt:'Promedio sostenible pero mejorable. El volumen compensa la eficiencia no élite.'},
-       {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'Activo indispensable. Condición: limitar a 29-30 MIN y trabajar el tiro libre.'}],
-   fav:['Nº1 del equipo en minutos y decisiones. Protagonismo insustituible.','Generador de puntos difíciles: libres, rebotes ofensivos y contacto.','B6 y B8 son sus mejores bloques, incluso en segunda vuelta.','Cierra fuerte la fase regular (B8: 14.6 PTS, VAL 15.4).'],
-   con:['Limitar a 29-30 MIN: superar 32 min baja su eFG% bajo el 43%.','Tiro libre (59.5%) es su mayor zona de pérdida de valor.','Plan defensivo ante equipos de ritmo alto (San Isidro, Barrio Parque).'],
-   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',rr:'Protagonista indispensable. Mayor volumen en minutos y decisiones. Condición: limitar a 29-30 MIN y trabajar el tiro libre (59.5%).',
-   phl:[{l:'PLAYS',v:'16.5'},{l:'USG%',v:'24.0%'}],pd:'Protagonista absoluto en volumen. Generador de puntos difíciles. Impacto élite en decisiones.',pb:'ÉLITE PTS'},
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script>
+// TU ENLACE DE PUBLICACIÓN
+const SHEETS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT8pjOI3HpkAbRvA8QkYxor0roEW5EvW2itcENG8zhrxb74J6IFNKYWJzCWzF8p51xJ8FKNYztf-SqI/pub?output=csv';
 
-  {id:'ibarra',name:'Ibarra',full:'Ibarra, Santiago R.',init:'SI',ab:'#1a3a2a',ac:'#4ae87a',
-   pj:31,min:26.28,plays:11.68,pts:13.23,ppp:1.13,usg:20.07,efg:58.39,val:10.94,
-   t2c:1.87,t2i:2.94,t2p:63.74,t3c:2.65,t3i:7.06,t3p:37.44,t1c:1.55,t1i:2.35,t1p:65.75,
-   ast:0.90,rd:2.71,ro:1.03,reb:3.74,
-   lPts:14.5,lEfg:61.2,lReb:4.0,lVal:12.1,vPts:12.0,vEfg:55.4,vReb:3.5,vVal:9.8,
-   lDesc:'Tirador élite de local: mayor conversión en T3 (39%+).',vDesc:'Baja levemente el triple; sostiene eficiencia interna.',
-   bl:[[12.8,54.2,10.5],[14.5,62.1,11.8],[11.2,55.8,9.2],[13.5,60.0,11.2],[11.0,52.0,8.8],[16.2,65.0,13.5],[14.8,58.5,12.8],[14.0,62.5,12.2]],
-   pe:{pts:'ÉLITE',plays:'PROM',efg:'ÉLITE',ppp:'ÉLITE'},pp:[91,58,85,95],
-   sc:[{lv:'Élite',lc:'amber',bc:'c-amber',lb:'Eficiencia individual',mt:'eFG% 58.4% · PPP 1.13',dt:'Mejor PPP del equipo. El jugador más rentable por posesión.'},
-       {lv:'Alto',lc:'green',bc:'c-green',lb:'Impacto anotador',mt:'13.2 PTS · T2% 63.7%',dt:'Segundo anotador del equipo con la mayor eficiencia interna.'},
-       {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'Titular indiscutible. Bajo RTL% lo hace sostenible.'}],
-   fav:['Mejor PPP del equipo (1.13): el jugador más rentable por posesión.','eFG% de 58.4%, el más alto entre los jugadores de rotación principal.','Consistencia: todos los bloques por encima de 52% eFG%.'],
-   con:['Aumentar volumen de PLAYS (11.7): puede absorber más decisiones.','Mejorar conversión desde 3 visitante: diferencia de 6pp.','Integrar como solución de espaciado en playoffs.'],
-   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',rr:'Mejor PPP del equipo (1.13) y eFG% de 58.4%. Tirador de dos más eficiente. Bajo RTL% (15.5%) lo hace sostenible.',
-   phl:[{l:'eFG%',v:'58.4%'},{l:'PPP',v:'1.13'}],pd:'Mejor PPP del equipo (1.13). Tirador de dos de élite (63.7% T2%). Motor ofensivo en 1vs1.',pb:'ÉLITE PTS'},
+let P = []; // Base de datos dinámica
+let charts = [];
+let page = 'team';
+let active = null;
 
-  {id:'grytsak',name:'Grytsak',full:'Grytsak, Andriy',init:'AG',ab:'#2a1a10',ac:'#e87a4a',
-   pj:31,min:26.54,plays:11.28,pts:10.00,ppp:0.89,usg:19.19,efg:49.81,val:15.42,
-   t2c:3.81,t2i:6.74,t2p:56.46,t3c:0.32,t3i:1.87,t3p:17.24,t1c:1.42,t1i:2.90,t1p:48.89,
-   ast:1.65,rd:4.68,ro:3.81,reb:8.48,
-   lPts:10.8,lEfg:52.0,lReb:9.2,lVal:16.8,vPts:9.2,vEfg:47.5,vReb:7.8,vVal:14.0,
-   lDesc:'Rebote dominante: 9.2 total en casa. VAL 16.8.',vDesc:'Baja el rebote ofensivo visitante; mantiene presencia defensiva.',
-   bl:[[10.5,47.5,15.8],[9.2,45.0,13.5],[11.5,52.0,17.2],[10.2,50.5,15.0],[9.8,48.0,14.2],[11.2,54.0,16.8],[10.5,50.0,15.5],[9.5,51.5,14.8]],
-   pe:{pts:'PROM',plays:'PROM',efg:'PROM',ppp:'PROM'},pp:[55,55,58,52],
-   sc:[{lv:'Máximo',lc:'amber',bc:'c-amber',lb:'Impacto en rebote',mt:'RD 4.68 · RO 3.81 · RT 8.48',dt:'Mejor reboteador del plantel. El rebote ofensivo (3.81) es clave para el sistema de segunda oportunidad.'},
-       {lv:'Alto',lc:'green',bc:'c-green',lb:'VAL colectivo',mt:'VAL 15.42 — Nº1 del plantel',dt:'A pesar de no liderar en PTS, su VAL es el más alto del equipo gracias al rebote y la defensa.'},
-       {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'Motor defensivo insustituible. El ancla interior del sistema.'}],
-   fav:['VAL más alto del plantel (15.4): motor defensivo y de rebote.','8.48 rebotes por partido: ancla del tablero en ambos extremos.','Rebote ofensivo élite (3.81): segunda oportunidad como sistema.'],
-   con:['Mejorar tiro libre (48.9%): vulnerable en situaciones de presión final.','Desarrollar amenaza perimetral mínima para abrir espacios.','Gestionar carga física.'],
-   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',rr:'VAL más alto del equipo (15.4) gracias al rebote total (8.48). Motor defensivo insustituible. El ancla interior del sistema.',
-   phl:[{l:'eFG%',v:'49.8%'},{l:'REB',v:'8.48'}],pd:'VAL más alto del plantel (15.4). Su valor radica en el rebote total (8.48 por partido). Motor defensivo del equipo.',pb:'ÉLITE VAL'},
+// FUNCIÓN PARA CARGAR LOS DATOS REALES
+async function loadSheetsData() {
+    return new Promise((resolve) => {
+        Papa.parse(SHEETS_URL, {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                // Mapeo de tus columnas de Google Sheets
+                P = results.data.filter(r => r.Jugador).map((row, i) => {
+                    const clean = (val) => parseFloat(String(val).replace('%', '').replace(',', '.')) || 0;
+                    return {
+                        id: row.Jugador.toLowerCase().replace(/\s/g, ''),
+                        name: row.Jugador.split(' ')[0],
+                        full: row.Jugador,
+                        pj: parseInt(row.PJ) || 0,
+                        min: clean(row.MIN),
+                        pts: clean(row.PTS),
+                        ppp: clean(row.PPP),
+                        efg: clean(row['eFG%']),
+                        ts: clean(row['TS%']),
+                        val: clean(row.VAL),
+                        color: `hsl(${(i * 360 / results.data.length)}, 65%, 60%)`
+                    };
+                });
+                resolve();
+            }
+        });
+    });
+}
 
-  {id:'tarnowyk',name:'Tarnowyk',full:'Tarnowyk, Francisco N.',init:'FT',ab:'#2a1a2a',ac:'#c87aaa',
-   pj:29,min:25.21,plays:11.85,pts:9.86,ppp:0.83,usg:21.22,efg:45.59,val:6.72,
-   t2c:2.00,t2i:4.10,t2p:48.74,t3c:1.52,t3i:5.28,t3p:28.76,t1c:1.31,t1i:2.00,t1p:65.52,
-   ast:2.00,rd:2.90,ro:0.83,reb:3.72,
-   lPts:10.5,lEfg:47.5,lReb:3.9,lVal:7.5,vPts:9.2,vEfg:43.5,vReb:3.5,vVal:5.9,
-   lDesc:'Mejor conversión interior de local; triple más regular.',vDesc:'Triple cae al 25%: su arma principal se apaga de visitante.',
-   bl:[[10.5,48.0,8.2],[9.8,44.5,6.5],[11.2,50.0,8.8],[10.5,47.0,7.5],[8.8,42.0,5.8],[10.5,46.5,7.2],[9.2,44.0,6.5],[8.5,41.5,5.5]],
-   pe:{pts:'PROM',plays:'PROM',efg:'PROM',ppp:'PROM'},pp:[52,58,42,45],
-   sc:[{lv:'Bajo',lc:'red',bc:'c-red',lb:'Eficiencia de triple',mt:'T3% 28.76% · eFG% 45.6%',dt:'Su principal arma rinde por debajo del umbral mínimo. Un triplista necesita al menos 34% para ser efectivo.'},
-       {lv:'Bajo',lc:'red',bc:'c-red',lb:'VAL colectivo',mt:'VAL 6.72 — el más bajo entre titulares',dt:'Para los minutos que recibe (25.2 MIN), su aporte global es el menor de la rotación principal.'},
-       {lv:'Media',lc:'orange',bc:'c-orange',lb:'Recomendación',mt:'EVALUAR',dt:'Si no mejora el triple en pretemporada, su utilidad en playoffs cae.'}],
-   fav:['Triplista de mayor volumen del equipo (44.5% del tiro desde 3).','Buen tiro libre en situaciones clave (65.5%).','Versatilidad posicional: puede jugar en 2 y 3.'],
-   con:['Mejorar conversión desde 3 (28.8%): su principal amenaza sub-rinde.','VAL de 6.72 el más bajo entre titulares: necesita otro aporte diferenciador.','Desarrollar juego de dos puntos.'],
-   ren:'eval',rl:'EVALUAR',rc:'#e87a4a',rr:'Mayor porcentaje de triples del plantel (44.5%) pero solo 28.8% de conversión. VAL 6.72 el más bajo entre titulares.',
-   phl:[{l:'eFG%',v:'45.6%'},{l:'T3%',v:'28.8%'}],pd:'Perfil perimetral: 44.5% del tiro son triples (mayor % del plantel). Baja conversión arrastra su eficiencia.',pb:'PROM'},
+// ESTA ES LA FUNCIÓN QUE CONECTA CON TUS GRÁFICOS ORIGINALES
+async function startApp() {
+    await loadSheetsData(); // Espera a los datos
+    if (P.length > 0) {
+        active = P[0].id; 
+        buildNav(); // Llama a tu función que crea los botones laterales
+        render();   // Llama a tu función que dibuja los gráficos
+    }
+}
 
-  {id:'marini',name:'Marini',full:'Marini, Juan Cruz',init:'JM',ab:'#2a2010',ac:'#e8c84a',
-   pj:31,min:24.87,plays:10.52,pts:8.84,ppp:0.84,usg:19.11,efg:47.83,val:9.32,
-   t2c:2.16,t2i:4.19,t2p:51.54,t3c:1.16,t3i:3.97,t3p:29.27,t1c:1.03,t1i:1.48,t1p:69.57,
-   ast:3.65,rd:2.77,ro:0.87,reb:3.65,
-   lPts:9.2,lEfg:49.5,lReb:3.8,lVal:10.2,vPts:8.5,vEfg:46.0,vReb:3.5,vVal:8.4,
-   lDesc:'Mejor organizador de local; más AST y VAL.',vDesc:'Mantiene la creación; menor eficiencia en definición.',
-   bl:[[9.2,48.5,10.5],[8.5,46.0,8.8],[9.5,50.0,10.2],[8.8,48.0,9.5],[7.5,44.5,7.8],[10.2,52.0,11.0],[9.0,47.5,9.8],[8.5,49.0,9.5]],
-   pe:{pts:'PROM',plays:'PROM',efg:'PROM',ppp:'PROM'},pp:[48,50,52,49],
-   sc:[{lv:'Máximo',lc:'amber',bc:'c-amber',lb:'Generación de juego',mt:'AST 3.65 — Nº1 del plantel',dt:'El mejor pasador del equipo. Su valor está en las posesiones que crea para sus compañeros.'},
-       {lv:'Sólida',lc:'blue',bc:'c-blue',lb:'Eficiencia individual',mt:'eFG% 47.8% · PPP 0.84',dt:'Eficiencia consistente toda la temporada. No fuerza el tiro.'},
-       {lv:'Alta',lc:'green',bc:'c-green',lb:'Recomendación',mt:'SÍ, RENOVAR',dt:'El sistema sufriría sin un base-creador de este perfil.'}],
-   fav:['Mayor generador de asistencias del plantel (3.65 AST).','Eficiencia sólida y consistente a lo largo de toda la temporada.','Doble de dos con buena conversión (51.5% T2%).'],
-   con:['Mejorar tiro libre (69.6%): por debajo del promedio.','Triple necesita trabajo: 29.3% de conversión.','Aumentar participación en posiciones de definición.'],
-   ren:'si',rl:'SÍ, RENOVAR',rc:'#4ae87a',rr:'Mayor generador de asistencias del plantel (3.65 AST). Su valor real está en la generación colectiva.',
-   phl:[{l:'AST',v:'3.65'},{l:'AST%',v:'12.6%'}],pd:'Organizador del equipo: mayor AST del plantel (3.65). Rol de base-creador.',pb:'PROM'},
+// Ejecutar al cargar la página
+startApp();
 
-  {id:'conti',name:'Conti',full:'Conti, Bruno B.',init:'BC',ab:'#1a1a3a',ac:'#7a7ae8',
-   pj:24,min:23.31,plays:9.40,pts:7.63,ppp:0.81,usg:18.20,efg:44.94,val:7.50,
-   t2c:1.08,t2i:2.67,t2p:40.63,t3c:1.50,t3i:4.75,t3p:31.58,t1c:0.96,t1i:1.38,t1p:69.70,
-   ast:3.33,rd:2.33,ro:0.83,reb:3.17,
-   lPts:8.5,lEfg:47.0,lReb:3.5,lVal:8.5,vPts:6.8,vEfg:42.5,vReb:2.8,vVal:6.5,
-   lDesc:'Mayor conversión de local; más cómodo en el sistema propio.',vDesc:'Baja marcadamente: PTS -1.7, eFG% -4.5pp, VAL -2.0.',
-   bl:[[8.5,46.0,8.5],[7.2,43.0,6.8],[8.8,48.0,9.0],[7.8,45.0,7.5],[6.5,42.0,6.0],[8.5,47.0,8.2],[7.5,44.5,7.8],[7.0,43.5,7.2]],
-   pe:{pts:'BAJA',plays:'BAJA',efg:'PROM',ppp:'BAJA'},pp:[42,40,48,38],
-   sc:[{lv:'Medio',lc:'orange',bc:'c-orange',lb:'Impacto colectivo',mt:'AST 3.33 · 24 PJ jugados',dt:'Buen creador (3.33 AST) pero solo jugó 24 partidos, la menor participación entre los titulares.'},
-       {lv:'Baja',lc:'red',bc:'c-red',lb:'Eficiencia individual',mt:'PPP 0.81 · eFG% 44.9%',dt:'El PPP más bajo del plantel entre jugadores de rotación.'},
-       {lv:'Media',lc:'orange',bc:'c-orange',lb:'Recomendación',mt:'EVALUAR',dt:'Perfil útil como sexto hombre pero no como pieza fija.'}],
-   fav:['Buen creador: AST alto (3.33) para su perfil.','Disponible para espaciar el campo desde el perímetro.'],
-   con:['Solo 24 PJ: menor participación entre los que integran la rotación.','PPP bajo (0.81) y eFG% (44.9%): mejorar toma de decisiones.','Triple (31.6%) y libre (69.7%) por debajo del nivel esperado.'],
-   ren:'eval',rl:'EVALUAR',rc:'#e87a4a',rr:'Solo 24 PJ jugados. PPP bajo (0.81), tiro libre deficiente (69.7%). Perfil útil como sexto hombre.',
-   phl:[{l:'T3%',v:'31.6%'},{l:'T1%',v:'69.7%'}],pd:'Rol de complemento perimetral. Solo 24 partidos jugados. PPP bajo (0.81) con dispersión de tiro irregular.',pb:'PROM'},
-
-  {id:'roca',name:'Roca',full:'Roca, Thiago E.',init:'TR',ab:'#0a2a1a',ac:'#4ae87a',
-   pj:32,min:18.29,plays:10.22,pts:9.63,ppp:0.94,usg:25.23,efg:52.80,val:5.19,
-   t2c:1.09,t2i:2.75,t2p:39.77,t3c:2.22,t3i:5.63,t3p:39.44,t1c:0.78,t1i:1.28,t1p:60.98,
-   ast:0.56,rd:1.84,ro:0.22,reb:2.06,
-   lPts:10.5,lEfg:55.0,lReb:2.2,lVal:6.0,vPts:8.8,vEfg:50.5,vReb:1.9,vVal:4.4,
-   lDesc:'Élite ofensivo de local: 55% eFG% en solo 18 min promedio.',vDesc:'Baja eficiencia visitante pero mantiene el triple por encima del 36%.',
-   bl:[[8.8,50.0,4.8],[9.5,52.0,5.2],[10.5,56.0,6.0],[9.0,51.5,4.5],[8.5,49.0,4.0],[11.5,58.0,7.0],[10.0,54.0,6.2],[9.8,52.5,4.8]],
-   pe:{pts:'ÉLITE',plays:'PROM',efg:'ÉLITE',ppp:'ÉLITE'},pp:[70,50,78,80],
-   sc:[{lv:'Élite',lc:'amber',bc:'c-amber',lb:'Eficiencia por minuto',mt:'eFG% 52.8% · USG% 25.2%',dt:'Genera el mayor impacto por minuto del plantel. Con solo 18.3 MIN, su USG% es el más alto del equipo.'},
-       {lv:'Alto',lc:'green',bc:'c-green',lb:'Rentabilidad (PPP)',mt:'PPP 0.94 — 2º del plantel',dt:'Segundo PPP del equipo. Triplista élite (39.4%).'},
-       {lv:'Máxima',lc:'amber',bc:'c-amber',lb:'Recomendación',mt:'AMPLIAR ROL',dt:'El jugador más infra-utilizado del plantel. Candidato a 24-26 MIN en playoffs.'}],
-   fav:['Mejor eFG% entre los rotadores (52.8%): el más eficiente por posesión.','USG% más alto del equipo (25.2%) en solo 18.3 MIN.','Triplista consistente: 39.4% de conversión, el mejor del equipo.'],
-   con:['Ampliar a 24-26 MIN en playoffs: actualmente sub-utilizado.','Mejorar tiro libre (61%): en momentos de presión.','VAL bajo (5.19) por falta de rebote.'],
-   ren:'cond',rl:'AMPLIAR ROL',rc:'#4ab8e8',rr:'El jugador más eficiente del banco: 52.8% eFG%, 0.94 PPP, USG% más alto del equipo (25.2%) en solo 18 MIN.',
-   phl:[{l:'eFG%',v:'52.8%'},{l:'USG%',v:'25.2%'}],pd:'Joya escondida: mejor eFG% entre los rotadores (52.8%) con USG% más alto (25.2%).',pb:'ÉLITE PPP'},
-
-  {id:'roveres',name:'Roveres',full:'Roveres, Augusto D.',init:'AR',ab:'#1e1e1e',ac:'#9a9890',
-   pj:32,min:15.88,plays:7.98,pts:8.28,ppp:1.04,usg:22.69,efg:49.31,val:10.81,
-   t2c:2.13,t2i:4.09,t2p:51.91,t3c:0.06,t3i:0.41,t3p:15.38,t1c:3.84,t1i:5.56,t1p:69.10,
-   ast:1.13,rd:2.50,ro:1.75,reb:4.25,
-   lPts:9.5,lEfg:52.5,lReb:4.8,lVal:12.5,vPts:7.0,vEfg:46.0,vReb:3.7,vVal:9.0,
-   lDesc:'Pívot dominante de local: RTL altísimo y conversión sólida.',vDesc:'Baja el volumen de faltas recibidas; mantiene aporte de rebote.',
-   bl:[[9.5,52.0,12.5],[8.0,47.0,10.2],[10.5,54.0,12.8],[8.5,49.5,11.5],[7.2,45.0,9.2],[10.2,53.0,12.2],[8.8,50.0,11.0],[7.0,44.5,8.5]],
-   pe:{pts:'PROM',plays:'BAJA',efg:'PROM',ppp:'ÉLITE'},pp:[45,35,55,88],
-   sc:[{lv:'Élite',lc:'amber',bc:'c-amber',lb:'Rentabilidad (PPP)',mt:'PPP 1.04 — 2º del plantel',dt:'El segundo PPP más alto del equipo. Cada posesión es extraordinariamente rentable.'},
-       {lv:'Alto',lc:'green',bc:'c-green',lb:'Impacto por minuto',mt:'VAL 10.81 en 15.9 MIN',dt:'RTL% de 85.4%: el pívot que más faltas genera del equipo.'},
-       {lv:'Alta',lc:'blue',bc:'c-blue',lb:'Recomendación',mt:'ROL DEFINIDO',dt:'Necesita 15-18 MIN con rol táctico claro: ataque al aro y rebote.'}],
-   fav:['PPP de 1.04: segundo del plantel. Altamente rentable en cada posesión.','RTL% de 85.4%: pívot que genera faltas sistemáticamente.','VAL de 10.81 en solo 15.9 MIN.'],
-   con:['Necesita rol claro de 15-18 MIN: sin definición su impacto se diluye.','Tiro libre (69.1%) mejorable para situaciones finales.','Nulo en triple: limitación en espacios abiertos.'],
-   ren:'cond',rl:'ROL DEFINIDO',rc:'#4ab8e8',rr:'PPP de 1.04 (segundo del plantel). Pívot de energía e impacto puntual. Necesita rol claro.',
-   phl:[{l:'PPP',v:'1.04'},{l:'RTL%',v:'85.4%'}],pd:'Pívot especializado en puntos de 1 (69.1% T1%). PPP de 1.04, segundo mejor del equipo.',pb:'ÉLITE T1%'},
-
-  {id:'nesman',name:'Nesman',full:'Nesman Ibañez, Santiago J.',init:'SN',ab:'#1a2a10',ac:'#b07ae8',
-   pj:32,min:8.83,plays:1.96,pts:1.31,ppp:0.67,usg:10.04,efg:39.36,val:1.97,
-   t2c:0.34,t2i:0.75,t2p:45.83,t3c:0.16,t3i:0.72,t3p:21.74,t1c:0.16,t1i:0.34,t1p:45.45,
-   ast:0.34,rd:1.09,ro:0.59,reb:1.69,
-   lPts:1.6,lEfg:42.0,lReb:1.9,lVal:2.4,vPts:1.0,vEfg:36.5,vReb:1.4,vVal:1.5,
-   lDesc:'Mayor aporte cuando juega de local: más contacto y rebote.',vDesc:'Rol puramente testimonial: menos de 2 jugadas por partido.',
-   bl:[[1.2,38.0,1.8],[0.8,35.0,1.2],[1.8,42.0,2.5],[1.5,40.5,2.2],[1.0,36.0,1.5],[1.8,43.0,2.8],[1.5,39.5,2.0],[1.2,38.5,1.8]],
-   pe:{pts:'BAJA',plays:'BAJA',efg:'BAJA',ppp:'BAJA'},pp:[12,8,28,30],
-   sc:[{lv:'Mínimo',lc:'red',bc:'c-red',lb:'Impacto colectivo',mt:'1.96 PLAYS · 8.83 MIN',dt:'El jugador con menor participación ofensiva del plantel. La muestra estadística es demasiado pequeña para extraer conclusiones firmes.'},
-       {lv:'Limitada',lc:'purple',bc:'c-purple',lb:'Eficiencia disponible',mt:'eFG% 39.4% · PPP 0.67',dt:'Baja eficiencia, pero con la condicionante de que casi no recibe posesiones. Difícil evaluar su techo real.'},
-       {lv:'Especial',lc:'blue',bc:'c-blue',lb:'Rol en el equipo',mt:'Defensa + actitud',dt:'Su aporte real no está en las estadísticas: es un elemento de roster que cubre lesiones y da descanso en situaciones de bajo riesgo.'}],
-   fav:['Presencia defensiva útil cuando el equipo necesita rotar.','Rebote ofensivo (0.59) aceptable para su tiempo en cancha.','Actitud y rol de banco que contribuye al clima grupal.'],
-   con:['1.96 PLAYS por partido: muestra insuficiente para evaluación técnica real.','eFG% de 39.4% y PPP de 0.67: los más bajos del plantel.','Tiro libre (45.5%) y triple (21.7%) muy por debajo del nivel mínimo requerido.','Su perfil ofensivo necesita trabajo de base antes de asumir más rol.'],
-   ren:'no',rl:'MUESTRA INSUFICIENTE',rc:'#9a9890',rr:'Con 8.83 MIN y 1.96 PLAYS por partido, la muestra estadística es insuficiente para un veredicto técnico. Su valor es de roster y actitudinal.',
-   phl:[{l:'RD',v:'1.09'},{l:'RO',v:'0.59'}],pd:'Rol testimonial (8.83 MIN, 1.96 PLAYS). Muestra estadística insuficiente para evaluar. Su aporte principal es defensivo y de actitud grupal.',pb:'ROL MÍNIMO'},
-
-  {id:'fornes',name:'Fornes',full:'Fornes, Francisco',init:'FF',ab:'#2a1a1a',ac:'#e84a4a',
-   pj:32,min:13.23,plays:2.92,pts:2.69,ppp:0.92,usg:9.98,efg:53.29,val:3.78,
-   t2c:0.66,t2i:1.19,t2p:55.26,t3c:0.41,t3i:1.19,t3p:34.21,t1c:0.16,t1i:0.25,t1p:62.50,
-   ast:0.44,rd:2.56,ro:1.09,reb:3.66,
-   lPts:3.0,lEfg:55.0,lReb:4.0,lVal:4.2,vPts:2.4,vEfg:51.5,vReb:3.4,vVal:3.4,
-   lDesc:'Mayor aporte de local; eficiencia sostenida cuando juega.',vDesc:'Rol mínimo: muy bajo volumen para extraer conclusiones.',
-   bl:[[2.5,52.0,3.5],[2.8,54.0,4.0],[3.2,56.0,4.5],[2.5,52.5,3.8],[2.2,50.0,3.2],[3.5,58.0,5.0],[2.8,53.5,4.0],[2.5,51.0,3.5]],
-   pe:{pts:'BAJA',plays:'BAJA',efg:'ÉLITE',ppp:'PROM'},pp:[18,12,80,55],
-   sc:[{lv:'Buena',lc:'blue',bc:'c-blue',lb:'Eficiencia (cuando tira)',mt:'eFG% 53.3% · T2% 55.3%',dt:'Cuando recibe posesiones las aprovecha bien. El problema es que recibe muy pocas.'},
-       {lv:'Bajo',lc:'red',bc:'c-red',lb:'Impacto colectivo',mt:'2.69 PTS · 2.92 PLAYS',dt:'Volumen mínimo. Su mayor aporte relativo es el rebote.'},
-       {lv:'Baja',lc:'red',bc:'c-red',lb:'Recomendación',mt:'NO PRIORITARIO',dt:'No justifica renovación prioritaria salvo por contexto salarial favorable.'}],
-   fav:['eFG% de 53.3%: cuando tira, lo hace con buena eficiencia.','Rebote (3.66) alto para el tiempo de juego que recibe.'],
-   con:['2.92 PLAYS: muestra estadística insuficiente.','No justifica renovación prioritaria.'],
-   ren:'no',rl:'NO PRIORITARIO',rc:'#e84a4a',rr:'2.92 PLAYS por partido. Muestra estadística insuficiente. El rebote relativo es su único diferencial visible.',
-   phl:[{l:'eFG%',v:'53.3%'},{l:'PLAYS',v:'2.92'}],pd:'Volumen mínimo (2.9 PLAYS). Rol de último recurso del banco.',pb:'ROL MÍNIMO'}
-];
+// --- AQUÍ COMIENZAN TUS FUNCIONES ORIGINALES (buildNav, render, etc.) ---
 
 const COLORS=['#4ab8e8','#4ae87a','#e87a4a','#c87aaa','#e8c84a','#7a7ae8','#4ae87a','#9a9890','#b07ae8','#e84a4a'];
 let page='team', active=P[0].id, charts=[];
