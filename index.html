@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jujuy Básquet · Análisis de Plantel 2025-26</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>  
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500&display=swap');
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -183,55 +184,43 @@
 // TU ENLACE DE PUBLICACIÓN
 const SHEETS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT8pjOI3HpkAbRvA8QkYxor0roEW5EvW2itcENG8zhrxb74J6IFNKYWJzCWzF8p51xJ8FKNYztf-SqI/pub?output=csv';
 
-let P = []; // Base de datos dinámica
+let P = []; // Ahora es una lista vacía que se llenará desde Drive
 let charts = [];
 let page = 'team';
 let active = null;
 
-// FUNCIÓN PARA CARGAR LOS DATOS REALES
-async function loadSheetsData() {
-    return new Promise((resolve) => {
-        Papa.parse(SHEETS_URL, {
-            download: true,
-            header: true,
-            skipEmptyLines: true,
-            complete: function(results) {
-                // Mapeo de tus columnas de Google Sheets
-                P = results.data.filter(r => r.Jugador).map((row, i) => {
-                    const clean = (val) => parseFloat(String(val).replace('%', '').replace(',', '.')) || 0;
-                    return {
-                        id: row.Jugador.toLowerCase().replace(/\s/g, ''),
-                        name: row.Jugador.split(' ')[0],
-                        full: row.Jugador,
-                        pj: parseInt(row.PJ) || 0,
-                        min: clean(row.MIN),
-                        pts: clean(row.PTS),
-                        ppp: clean(row.PPP),
-                        efg: clean(row['eFG%']),
-                        ts: clean(row['TS%']),
-                        val: clean(row.VAL),
-                        color: `hsl(${(i * 360 / results.data.length)}, 65%, 60%)`
-                    };
-                });
-                resolve();
-            }
+// FUNCIÓN CLAVE: Lee tu Drive y limpia los datos para que no den NaN
+async function loadData() {
+  return new Promise((resolve) => {
+    Papa.parse(SHEETS_URL, {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: function(results) {
+        P = results.data.filter(r => r.Jugador).map((row, i) => {
+          // Esta función quita los % y las comas que rompen los gráficos
+          const num = (v) => parseFloat(String(v).replace('%', '').replace(',', '.')) || 0;
+          return {
+            id: row.Jugador.toLowerCase().replace(/\s/g, ''),
+            name: row.Jugador.split(' ')[0],
+            full: row.Jugador,
+            pj: parseInt(row.PJ) || 0,
+            min: num(row.MIN),
+            pts: num(row.PTS),
+            ppp: num(row.PPP),
+            efg: num(row['eFG%']),
+            ts: num(row['TS%']),
+            val: num(row.VAL),
+            per: num(row['PER%']),
+            usg: num(row['USG%']),
+            color: `hsl(${(i * 360 / results.data.length)}, 60%, 60%)`
+          };
         });
+        resolve();
+      }
     });
+  });
 }
-
-// ESTA ES LA FUNCIÓN QUE CONECTA CON TUS GRÁFICOS ORIGINALES
-async function startApp() {
-    await loadSheetsData(); // Espera a los datos
-    if (P.length > 0) {
-        active = P[0].id; 
-        buildNav(); // Llama a tu función que crea los botones laterales
-        render();   // Llama a tu función que dibuja los gráficos
-    }
-}
-
-// Ejecutar al cargar la página
-startApp();
-
 // --- AQUÍ COMIENZAN TUS FUNCIONES ORIGINALES (buildNav, render, etc.) ---
 
 const COLORS=['#4ab8e8','#4ae87a','#e87a4a','#c87aaa','#e8c84a','#7a7ae8','#4ae87a','#9a9890','#b07ae8','#e84a4a'];
@@ -246,24 +235,17 @@ document.getElementById('topNav').addEventListener('click',e=>{
   render();
 });
 
-function buildNav(){
-  const nav=document.getElementById('playerNav'); nav.innerHTML='';
-  P.forEach(p=>{
-    const b=document.createElement('button');
-    b.className='player-btn'+(p.id===active?' active':'');
-    b.textContent=p.name;
-    b.onclick=()=>{active=p.id;nav.querySelectorAll('.player-btn').forEach((x,i)=>x.classList.toggle('active',P[i].id===active));render();};
-    nav.appendChild(b);
-  });
+// Reemplaza las llamadas directas por esto:
+async function init() {
+  await loadData(); // Espera a que Drive responda
+  if (P.length > 0) {
+    active = P[0].id;
+    buildNav();
+    render();
+  }
 }
-buildNav();
 
-function render(){
-  charts.forEach(c=>c.destroy()); charts=[];
-  if(page==='team') renderTeam();
-  else if(page==='players') renderPlayer(P.find(x=>x.id===active));
-  else renderSummary();
-}
+init();
 
 function bdg(s){
   if(s==='ÉLITE') return `<span class="badge-e">ÉLITE ✦</span>`;
